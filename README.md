@@ -36,7 +36,7 @@ By combining computer vision, multimodal AI and real-time analysis, PhysioFlow A
 ### Team Name:  
 The Bois
 
-### Team Members:   *(Add links if you want)*
+### Team Members:
 - Dhananjay Tiwari (https://github.com/dhananjay2403 http://www.linkedin.com/in/dhananjaytiwari24) - Frontend + Computer Vision
 - Siddharth Kumar (https://github.com/siddharth23k) - Backend + ML
 - Lisha Angral (https://github.com/lishaangral) - UI design + Frontend
@@ -89,7 +89,7 @@ Our team recognized a critical gap in healthcare accessibility: while physiother
 ### Sponsor Technologies Used (if any):
 <!-- [ ] **Groq:** _How you used Groq_  *(Mark with ✅ if completed)* -->
 
-✅ Groq: Used Groq's multimodal AI to analyze user movements captured via camera and provide intelligent, context-aware feedback on exercise form. The Groq API powers our virtual physiotherapist assistant, enabling it to understand both visual movements and voice commands, generating personalized exercise plans, and delivering natural language feedback on technique corrections.
+- ✅ Groq: Used Groq's multimodal AI to analyze user movements captured via camera and provide intelligent, context-aware feedback on exercise form. The Groq API powers our virtual physiotherapist assistant, enabling it to understand both visual movements and voice commands, generating personalized exercise plans, and delivering natural language feedback on technique corrections.
 ---
 
 ## ✨ Key Features
@@ -97,11 +97,11 @@ Our team recognized a critical gap in healthcare accessibility: while physiother
 <!-- Highlight the most important features of your project:
 Add images, GIFs, or screenshots if helpful! -->
 
-✅ Real-time Movement Analysis: Using MediaPipe and custom algorithms to track body movements and provide instant feedback on exercise form.
-✅ Multimodal AI Guidance: Groq-powered assistant that understands both visual input and voice commands to provide personalized coaching.
-✅ Responsive Design: Optimized experience for mobile (camera functionality) and desktop (progress tracking and visualization).
-✅ Comprehensive Progress Tracking: Visual reports and metrics showing improvement over time and generating personalized exercise plans.
-✅ Exercise Library: Curated collection of physiotherapy and yoga exercises with detailed instructions and visual guides.
+- ✅ Real-time Movement Analysis: Using MediaPipe and custom algorithms to track body movements and provide instant feedback on exercise form.
+- ✅ Multimodal AI Guidance: Groq-powered assistant that understands both visual input and voice commands to provide personalized coaching.
+- ✅ Responsive Design: Optimized experience for mobile (camera functionality) and desktop (progress tracking and visualization).
+- ✅ Comprehensive Progress Tracking: Visual reports and metrics showing improvement over time and generating personalized exercise plans.
+- ✅ Exercise Library: Curated collection of physiotherapy and yoga exercises with detailed instructions and visual guides.
 
 
 ---
@@ -186,13 +186,13 @@ The application will be available at http://localhost:3000
 - 🛡️ Security enhancements  
 - 🌐 Localization / broader accessibility   -->
 
-🧘 Yoga Pose Analyzer: Extend our movement detection system to recognize & guide through yoga poses with proper alignment feedback
-🏋️ Strength Training Analysis: Add support for analyzing weight lifting form and providing safety guidance
-🏥 Healthcare Provider Dashboard: Create an interface for physiotherapists to monitor patient progress remotely
-🗣️ Enhanced Voice Interaction: Develop more sophisticated voice command recognition for hands-free operation
-📱 Mobile App Development: Native mobile applications for improved performance and offline capabilities
-🤝 Integration with Wearables: Connect with fitness trackers and smartwatches for more precise movement data
-🌐 Multilingual Support: Localization for global accessibility and cultural-specific exercise routines
+- 🧘 Yoga Pose Analyzer: Extend our movement detection system to recognize & guide through yoga poses with proper alignment feedback
+- 🏋️ Strength Training Analysis: Add support for analyzing weight lifting form and providing safety guidance
+- 🏥 Healthcare Provider Dashboard: Create an interface for physiotherapists to monitor patient progress remotely
+- 🗣️ Enhanced Voice Interaction: Develop more sophisticated voice command recognition for hands-free operation
+- 📱 Mobile App Development: Native mobile applications for improved performance and offline capabilities
+- 🤝 Integration with Wearables: Connect with fitness trackers and smartwatches for more precise movement data
+- 🌐 Multilingual Support: Localization for global accessibility and cultural-specific exercise routines
 
 ---
 
@@ -229,4 +229,4 @@ Our biggest learning was the importance of simplicity and accessibility; while w
 
 We'd like to thank the hackathon organizers and sponsors, especially Groq for providing the multimodal AI capabilities that power our virtual physiotherapist. This journey has only strengthened our belief that AI can transform healthcare for the better.
 
----# physioflow-ai
+---
