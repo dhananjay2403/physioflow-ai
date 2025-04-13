@@ -38,9 +38,9 @@ The Bois
 
 ### Team Members:   *(Add links if you want)*
 - Dhananjay Tiwari (https://github.com/dhananjay2403 http://www.linkedin.com/in/dhananjaytiwari24) - Frontend + Computer Vision
-- Siddharth Kumar (GitHub / LinkedIn / Role) - Backend + ML
-- Lisha Angral (GitHub / LinkedIn / Role) - UI design + Frontend
-- Anshul Dhoptey (GitHub / LinkedIn / Role) - Computer Vision
+- Siddharth Kumar (https://github.com/siddharth23k) - Backend + ML
+- Lisha Angral (https://github.com/lishaangral) - UI design + Frontend
+- Anshul Dhoptey (https://github.com/Spectre-anshul) - Computer Vision
 
 ### Your Approach:  
 <!-- Why we chose this problem -->
