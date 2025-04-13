@@ -63,30 +63,35 @@ Our team recognized a critical gap in healthcare accessibility: while physiother
 ## 🛠️ Tech Stack
 
 ### Core Technologies Used:
-- Frontend: React.js for component-based UI
-            Tailwind CSS for responsive design
-            TensorFlow.js and MediaPipe for client-side pose detection
-            React Router for navigation
-            Axios for API communication
+- Frontend: <br/>
+        React.js for component-based UI <br/>
+        Tailwind CSS for responsive design <br/>
+        TensorFlow.js and MediaPipe for client-side pose detection <br/>
+        React Router for navigation <br/>
+        Axios for API communication <br/>
 
-- Backend:  Flask for API development
-            Python for computer vision processing
-            Scikit-learn for machine learning models
-            JWT for authentication
-            Swagger for API documentation
+- Backend: <br/>  
+        Flask for API development  <br/>
+        Python for computer vision processing  <br/>
+        Scikit-learn for machine learning models  <br/>
+        JWT for authentication  <br/>
+        Swagger for API documentation  <br/>
 
-- Database: MongoDB for user data, exercise library, and progress tracking
-            Redis for caching frequent queries and session management
+- Database: <br/> 
+        MongoDB for user data, exercise library, and progress tracking <br/>
+        Redis for caching frequent queries and session management <br/>
 
-- APIs: Groq API for multimodal AI guidance
-        MediaPipe Pose for skeletal tracking
-        Web Speech API for voice recognition
+- APIs: <br/> 
+        Groq API for multimodal AI guidance <br/>
+        MediaPipe Pose for skeletal tracking <br/>
+        Web Speech API for voice recognition <br/>
 
-- Hosting:  Vercel for frontend deployment
-            Heroku for backend services
-            MongoDB Atlas for database hosting
+- Hosting: <br/>  
+        Vercel for frontend deployment  <br/>
+        Heroku for backend services  <br/>
+        MongoDB Atlas for database hosting  <br/>
 
-### Sponsor Technologies Used (if any):
+### Sponsor Technologies Used:
 <!-- [ ] **Groq:** _How you used Groq_  *(Mark with ✅ if completed)* -->
 
 - ✅ Groq: Used Groq's multimodal AI to analyze user movements captured via camera and provide intelligent, context-aware feedback on exercise form. The Groq API powers our virtual physiotherapist assistant, enabling it to understand both visual movements and voice commands, generating personalized exercise plans, and delivering natural language feedback on technique corrections.
@@ -186,13 +191,13 @@ The application will be available at http://localhost:3000
 - 🛡️ Security enhancements  
 - 🌐 Localization / broader accessibility   -->
 
-- 🧘 Yoga Pose Analyzer: Extend our movement detection system to recognize & guide through yoga poses with proper alignment feedback
-- 🏋️ Strength Training Analysis: Add support for analyzing weight lifting form and providing safety guidance
-- 🏥 Healthcare Provider Dashboard: Create an interface for physiotherapists to monitor patient progress remotely
-- 🗣️ Enhanced Voice Interaction: Develop more sophisticated voice command recognition for hands-free operation
-- 📱 Mobile App Development: Native mobile applications for improved performance and offline capabilities
-- 🤝 Integration with Wearables: Connect with fitness trackers and smartwatches for more precise movement data
-- 🌐 Multilingual Support: Localization for global accessibility and cultural-specific exercise routines
+- Yoga Pose Analyzer: Extend our movement detection system to recognize & guide through yoga poses with proper alignment feedback
+- Strength Training Analysis: Add support for analyzing weight lifting form and providing safety guidance
+- Healthcare Provider Dashboard: Create an interface for physiotherapists to monitor patient progress remotely
+- Enhanced Voice Interaction: Develop more sophisticated voice command recognition for hands-free operation
+- Mobile App Development: Native mobile applications for improved performance and offline capabilities
+- Integration with Wearables: Connect with fitness trackers and smartwatches for more precise movement data
+- Multilingual Support: Localization for global accessibility and cultural-specific exercise routines
 
 ---
 
