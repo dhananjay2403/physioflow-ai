@@ -37,7 +37,7 @@ By combining computer vision, multimodal AI and real-time analysis, PhysioFlow A
 The Bois
 
 ### Team Members:
-- Dhananjay Tiwari (https://github.com/dhananjay2403 http://www.linkedin.com/in/dhananjaytiwari24) - Frontend + Computer Vision
+- Dhananjay Tiwari (https://github.com/dhananjay2403) - Frontend + Computer Vision
 - Siddharth Kumar (https://github.com/siddharth23k) - Backend + ML
 - Lisha Angral (https://github.com/lishaangral) - UI design + Frontend
 - Anshul Dhoptey (https://github.com/Spectre-anshul) - Computer Vision
@@ -63,30 +63,30 @@ Our team recognized a critical gap in healthcare accessibility: while physiother
 ## 🛠️ Tech Stack
 
 ### Core Technologies Used:
-- Frontend: <br/>
+- <u>Frontend:</u> <br/>
         React.js for component-based UI <br/>
         Tailwind CSS for responsive design <br/>
         TensorFlow.js and MediaPipe for client-side pose detection <br/>
         React Router for navigation <br/>
         Axios for API communication <br/>
 
-- Backend: <br/>  
+- </u>Backend:</u>  
         Flask for API development  <br/>
         Python for computer vision processing  <br/>
         Scikit-learn for machine learning models  <br/>
         JWT for authentication  <br/>
         Swagger for API documentation  <br/>
 
-- Database: <br/> 
+- </u>Database:</u>  <br/> 
         MongoDB for user data, exercise library, and progress tracking <br/>
         Redis for caching frequent queries and session management <br/>
 
-- APIs: <br/> 
+- </u>APIs:</u>  <br/> 
         Groq API for multimodal AI guidance <br/>
         MediaPipe Pose for skeletal tracking <br/>
         Web Speech API for voice recognition <br/>
 
-- Hosting: <br/>  
+- </u>Hosting:</u>  
         Vercel for frontend deployment  <br/>
         Heroku for backend services  <br/>
         MongoDB Atlas for database hosting  <br/>
