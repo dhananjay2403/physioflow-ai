@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Box,
   Typography,
@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 
 const GroqAssistant = () => {
   const navigate = useNavigate();
+  const messagesEndRef = useRef(null); // Ref to the end of messages
+
   const [messages, setMessages] = useState([
     {
       sender: 'groq',
@@ -38,6 +40,11 @@ const GroqAssistant = () => {
     setMessages(newMessages);
     setInput('');
   };
+
+  // Scroll to bottom when messages update
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   return (
     <Box
@@ -126,6 +133,8 @@ const GroqAssistant = () => {
               </Box>
             </Box>
           ))}
+          {/* Auto-scroll target */}
+          <div ref={messagesEndRef} />
         </Box>
 
         {/* Input Field */}
@@ -141,7 +150,7 @@ const GroqAssistant = () => {
           <TextField
             fullWidth
             size="small"
-            placeholder="Describe your symptoms or ask for an exercise..."
+            placeholder="Ask me anything..."
             variant="outlined"
             value={input}
             onChange={(e) => setInput(e.target.value)}
