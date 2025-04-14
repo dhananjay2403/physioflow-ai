@@ -1,8 +1,9 @@
 import React from 'react'
+import AppAppBar from './AppAppBar'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <AppAppBar></AppAppBar>
   )
 }
 
