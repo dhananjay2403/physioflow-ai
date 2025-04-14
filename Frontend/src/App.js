@@ -5,7 +5,7 @@ import GroqAssistant from './components/GroqAssistant';
 
 const App = () => (
   <BrowserRouter>
-    <Box sx={{ backgroundColor: '#000'}}>
+    <Box sx={{ backgroundColor: '#f0f2f5', minHeight: '100vh' }}>
       <Routes>
         <Route path="/" exact element={<HomePage />} />
         <Route path="/chatbot" element={<GroqAssistant />}/>
