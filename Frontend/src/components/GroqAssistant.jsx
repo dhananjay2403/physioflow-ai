@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { SendIcon, CloseIcon, AssistantIcon, UserIcon } from '../utils/GroqAssistant';
 import { useNavigate } from 'react-router-dom';
+import AppAppBar from './AppAppBar'
 
 const GroqAssistant = () => {
   const navigate = useNavigate();
@@ -54,9 +55,10 @@ const GroqAssistant = () => {
         justifyContent: 'center',
         minHeight: '100vh',
         background: 'url("/bg-blur.jpg") no-repeat center center / cover',
-        p: 2,
+        p: 5,
       }}
     >
+      <AppAppBar></AppAppBar>
       <Paper
         elevation={4}
         sx={{
