@@ -7,7 +7,7 @@ import {
   Avatar,
   Paper,
 } from '@mui/material';
-import { SendIcon, CloseIcon, AssistantIcon, UserIcon } from '../utils/constants';
+import { SendIcon, CloseIcon, AssistantIcon, UserIcon } from '../utils/GroqAssistant';
 import { useNavigate } from 'react-router-dom';
 
 const GroqAssistant = () => {
