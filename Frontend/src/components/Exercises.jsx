@@ -10,16 +10,17 @@ import {
   Card,
   CardContent,
   CardMedia,
-  useTheme,
+//   useTheme,
 } from '@mui/material';
 import { Search, ArrowBack } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { exerciseData } from '../utils/constants';
 
+
 const Exercises = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
-  const theme = useTheme();
+//   const theme = useTheme();
 
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
@@ -40,31 +41,25 @@ const Exercises = () => {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Exercises
           </Typography>
-          <Box sx={{ position: 'relative', ml: 2 }}>
-            <Search
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                left: 8,
-                transform: 'translateY(-50%)',
-                color: 'gray',
-              }}
-            />
-            <InputBase
-              placeholder="Search exercises…"
-              value={searchQuery}
-              onChange={handleSearchChange}
-              sx={{
+          <Box
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
                 bgcolor: '#e0e0e0',
                 borderRadius: 2,
-                pl: 4,
+                pl: 1,
                 pr: 2,
-                py: 0.5,
                 width: { xs: 140, sm: 200, md: 250 },
-                fontSize: '0.9rem',
-              }}
+            }}
+            >
+            <Search sx={{ color: 'gray', mr: 1 }} />
+            <InputBase
+                placeholder="Search exercises…"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                fullWidth
             />
-          </Box>
+            </Box>
         </Toolbar>
       </AppBar>
 
