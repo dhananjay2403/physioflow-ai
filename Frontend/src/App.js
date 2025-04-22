@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {Box, ThemeProvider, CssBaseline} from '@mui/material';
 import HomePage from './components/HomePage';
-import GroqAssistant from './components/GroqAssistant';
+// import GroqAssistant from './components/GroqAssistant';
 import theme from './theme'; // Import your theme
 
 const App = () => (
@@ -11,7 +11,7 @@ const App = () => (
       <Box sx={{ backgroundColor: '#f0f2f5', minHeight: '100vh' }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/chatbot" element={<GroqAssistant />}/>
+          {/* <Route path="/chatbot" element={<GroqAssistant />}/> */}
         </Routes>
       </Box>
     </BrowserRouter>
