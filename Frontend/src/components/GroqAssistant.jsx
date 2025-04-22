@@ -23,22 +23,64 @@ const GroqAssistant = () => {
   ]);
   const [input, setInput] = useState('');
 
-  const handleSend = () => {
+  // const handleSend = () => {
+  //   if (!input.trim()) return;
+
+  //   const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  //   const newMessages = [
+  //     ...messages,
+  //     { sender: 'user', text: input.trim(), time },
+  //     {
+  //       sender: 'groq',
+  //       text: `You said: "${input.trim()}". (This is a placeholder reply.)`,
+  //       time,
+  //     },
+  //   ];
+  //   setMessages(newMessages);
+  //   setInput('');
+  // };
+  const handleSend = async () => {
     if (!input.trim()) return;
-
+  
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
+  
+    // Add user's message to the state
     const newMessages = [
       ...messages,
       { sender: 'user', text: input.trim(), time },
-      {
-        sender: 'groq',
-        text: `You said: "${input.trim()}". (This is a placeholder reply.)`,
-        time,
-      },
     ];
     setMessages(newMessages);
     setInput('');
+  
+    // Make the API call to your Flask backend
+    try {
+      const response = await fetch('http://localhost:5001/get-groq-feedback', {  // Update URL here
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt: input.trim(),  // 'prompt' key should match the Flask route's expected input
+        }),
+      });
+      const data = await response.json();
+  
+      if (data.response) {
+        // Add Groq's response to the state
+        const groqResponse = {
+          sender: 'groq',
+          text: data.response,
+          time,
+        };
+        setMessages((prevMessages) => [...prevMessages, groqResponse]);
+      } else {
+        throw new Error('No response from Groq');
+      }
+    } catch (error) {
+      console.error('Error while communicating with Groq:', error);
+      // Handle error here (e.g., display an error message)
+    }
   };
 
   // Scroll to bottom when messages update
