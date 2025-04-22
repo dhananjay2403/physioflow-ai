@@ -218,7 +218,7 @@ function Features() {
 }
 
 // Testimonials section
-function Testimonials() {
+/* function Testimonials() {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -331,7 +331,7 @@ function Testimonials() {
       </Container>
     </Box>
   );
-}
+} */
 
 // FAQ section
 function FAQ() {
@@ -471,7 +471,7 @@ function Footer() {
           AI-Powered Physiotherapy Assistant
         </Typography>
         <Typography variant="body2" color="white" align="center" sx={{ opacity: 0.8 }}>
-          © {new Date().getFullYear()} PhysioFlow. All rights reserved.
+          {new Date().getFullYear()} PhysioFlow. All rights reserved.
         </Typography>
       </Container>
     </Box>
@@ -486,7 +486,7 @@ export default function HomePage() {
         <Hero />
         <VideoDemo />
         <Features />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <FAQ />
       </main>
       <Footer />
