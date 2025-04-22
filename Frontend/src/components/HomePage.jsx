@@ -9,12 +9,12 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Divider from '@mui/material/Divider';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+// import Divider from '@mui/material/Divider';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
 
 // Import navbar
 import AppAppBar from './AppAppBar';
@@ -23,6 +23,7 @@ import AppAppBar from './AppAppBar';
 function Hero() {
   return (
     <Box
+      id="home"
       sx={{
         background: 'linear-gradient(180deg, #f8f9fa 0%, #e8f0fe 100%)',
         pt: 16, // Increased from 8 to 16 to account for navbar height
@@ -65,10 +66,13 @@ function Hero() {
 // Video section
 function VideoDemo() {
   return (
-    <Box sx={{ 
-      background: 'linear-gradient(180deg, #e8f0fe 0%, #f8f9fa 100%)',
-      py: 8 
-    }}>
+    <Box
+      id="demo"
+      sx={{ 
+        background: 'linear-gradient(180deg, #e8f0fe 0%, #f8f9fa 100%)',
+        py: 8 
+      }}
+    >
       <Container maxWidth="lg">
         <Typography variant="h4" align="center" gutterBottom>
           See PhysioFlow in Action
@@ -164,7 +168,7 @@ function Features() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography variant="h4" align="center" gutterBottom id="features">
             Key Features
           </Typography>
         </motion.div>
@@ -333,11 +337,12 @@ function Features() {
   );
 } */
 
+
 // FAQ section
 function FAQ() {
   const [expanded, setExpanded] = React.useState(false);
   
-  const { ref, inView } = useInView({
+  const { ref: faqRef, inView: faqInView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
@@ -346,17 +351,17 @@ function FAQ() {
     {
       id: 'panel1',
       question: 'What equipment do I need to use PhysioFlow?',
-      answer: 'Just a smartphone or tablet with a camera. PhysioFlow works on any modern device with web access. The app is optimized for both mobile and desktop experiences, with mobile focusing on camera-based tracking and desktop providing detailed analytics and progress visualization.',
+      answer: 'Just a smartphone or tablet with a camera. PhysioFlow works on any modern device with web access. The app is optimized for both mobile and desktop experiences, with mobile focusing on camera-based tracking.',
     },
     {
       id: 'panel2',
       question: 'How accurate is the movement detection?',
-      answer: 'Our AI-powered system achieves 95% accuracy in detecting proper form and movement patterns. We use a combination of TensorFlow and MediaPipe technologies to track 33 key body points in real-time, allowing for precise analysis of your movements.',
+      answer: 'Our AI-powered system achieves 85% accuracy in detecting proper form and movement patterns. We use a combination of OpenCV and MediaPipe technologies to track 33 key body points in real-time, allowing for precise analysis of your movements.',
     },
     {
       id: 'panel3',
       question: 'Can I use PhysioFlow without a prescription?',
-      answer: 'Yes! While PhysioFlow works great with professional guidance, anyone can use it for exercise guidance and form correction. The app includes a library of common physiotherapy exercises and yoga poses that are safe for most users.',
+      answer: 'Yes! While PhysioFlow works great with professional guidance, anyone can use it for exercise guidance and form correction. The app includes a exercise modules of common physiotherapy exercises and yoga poses that are safe for most users.',
     },
     {
       id: 'panel4',
@@ -371,12 +376,12 @@ function FAQ() {
     {
       id: 'panel6',
       question: 'Can I track my progress over time?',
-      answer: 'Yes, PhysioFlow includes comprehensive progress tracking features. You can view detailed analytics of your performance, including range of motion improvements, exercise consistency, and form accuracy over time. All this data is visualized in easy-to-understand charts and graphs.',
+      answer: 'Unfortunately, PhysioFlow does not include comprehensive progress tracking features at the moment. We are working on providing detailed analytics of your performance, including range of motion improvements, exercise consistency, and form accuracy over time.',
     },
     {
       id: 'panel7',
       question: 'Do I need a subscription to use PhysioFlow?',
-      answer: 'PhysioFlow offers both free and premium tiers. The free version includes basic exercise tracking and form analysis, while the premium subscription provides advanced features like personalized exercise programs, detailed progress analytics, and unlimited access to our exercise library.',
+      answer: 'PhysioFlow is completely free to use. All features, including exercise tracking, form analysis, and access to our exercise library, are available at no cost. Enjoy the full experience without any subscription or hidden fees.',
     },
     {
       id: 'panel8',
@@ -385,12 +390,16 @@ function FAQ() {
     },
   ];
 
+  const handleExpand = (id) => {
+    setExpanded(expanded === id ? false : id);
+  };
+
   return (
-    <Box sx={{ py: 8 }} ref={ref}>
+    <Box sx={{ py: 8 }} ref={faqRef}>
       <Container maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+          animate={faqInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ 
             type: 'spring',
             stiffness: 50,
@@ -398,28 +407,39 @@ function FAQ() {
             duration: 0.8 
           }}
         >
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography variant="h4" align="center" gutterBottom id="faq">
             Frequently Asked Questions
           </Typography>
         </motion.div>
         <Box sx={{ mt: 4 }}>
-          {faqs.map((faq) => (
-            <Box key={faq.id} sx={{ mb: 2 }}>
-              <Box 
-                onClick={() => setExpanded(expanded === faq.id ? false : faq.id)}
-                sx={{ 
-                  p: 2, 
-                  bgcolor: 'background.paper', 
-                  borderRadius: expanded === faq.id ? '4px 4px 0 0' : 1,
-                  boxShadow: 1,
+          {faqs.map((faq, idx) => (
+            <motion.div
+              key={faq.id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={faqInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{ duration: 0.45, delay: 0.1 + idx * 0.08, ease: [0.4, 0, 0.2, 1] }}
+              style={{ width: '100%', marginBottom: 20 }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: 'primary.main',
+                  color: 'white',
+                  borderTopLeftRadius: 8,
+                  borderTopRightRadius: 8,
+                  borderBottomLeftRadius: expanded === faq.id ? 0 : 8,
+                  borderBottomRightRadius: expanded === faq.id ? 0 : 8,
+                  boxShadow: 2,
+                  p: 2,
                   display: 'flex',
-                  justifyContent: 'space-between',
                   alignItems: 'center',
+                  justifyContent: 'space-between',
                   cursor: 'pointer',
-                  '&:hover': { bgcolor: 'action.hover' }
+                  mb: 0,
+                  transition: 'border-radius 0.3s',
                 }}
+                onClick={() => handleExpand(faq.id)}
               >
-                <Typography variant="h6">
+                <Typography variant="subtitle2" color="white">
                   {faq.question}
                 </Typography>
                 <Box sx={{ 
@@ -429,24 +449,26 @@ function FAQ() {
                   ▼
                 </Box>
               </Box>
-              <Box sx={{ 
-                height: expanded === faq.id ? 'auto' : 0,
-                overflow: 'hidden',
-                transition: 'height 0.3s ease-in-out',
-                bgcolor: 'background.paper',
-                borderBottomLeftRadius: 1,
-                borderBottomRightRadius: 1,
-                boxShadow: 1,
-                visibility: expanded === faq.id ? 'visible' : 'hidden',
-                opacity: expanded === faq.id ? 1 : 0,
-                transition: 'all 0.3s ease-in-out',
-                mt: -0.5
-              }}>
-                <Typography variant="body1" color="text.secondary" sx={{ p: 2 }}>
-                  {faq.answer}
-                </Typography>
-              </Box>
-            </Box>
+              <Collapse in={expanded === faq.id} timeout={400} easing={{ enter: 'cubic-bezier(0.4,0,0.2,1)', exit: 'cubic-bezier(0.4,0,0.2,1)' }}>
+                <Box
+                  sx={{
+                    backgroundColor: 'primary.main',
+                    color: 'white',
+                    borderBottomLeftRadius: 8,
+                    borderBottomRightRadius: 8,
+                    borderTopLeftRadius: 0,
+                    borderTopRightRadius: 0,
+                    boxShadow: 2,
+                    p: 2,
+                    mt: 0,
+                  }}
+                >
+                  <Typography variant="body1" color="white" sx={{ p: 2, pt: 0 }}>
+                    {faq.answer}
+                  </Typography>
+                </Box>
+              </Collapse>
+            </motion.div>
           ))}
         </Box>
       </Container>
@@ -456,23 +478,89 @@ function FAQ() {
 
 // Footer section
 function Footer() {
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <Box sx={{ bgcolor: 'primary.main', py: 6, color: 'white' }}>
+    <Box sx={{ bgcolor: 'primary.main', py: 3, color: 'white' }}>
       <Container maxWidth="lg">
-        <Typography variant="h6" align="center" gutterBottom>
-          PhysioFlow
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="white"
-          component="p"
-        >
-          AI-Powered Physiotherapy Assistant
-        </Typography>
-        <Typography variant="body2" color="white" align="center" sx={{ opacity: 0.8 }}>
-          {new Date().getFullYear()} PhysioFlow. All rights reserved.
-        </Typography>
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          flexDirection: { xs: 'column', sm: 'row' },
+          gap: { xs: 2, sm: 0 }
+        }}>
+          {/* Navigation Links */}
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+            <Typography 
+              variant="body2" 
+              color="white" 
+              sx={{ 
+                cursor: 'pointer',
+                '&:hover': { textDecoration: 'underline' }
+              }}
+              onClick={() => scrollToSection('home')}
+            >
+              Home
+            </Typography>
+            <Typography variant="body2" color="white">•</Typography>
+            <Typography 
+              variant="body2" 
+              color="white"
+              sx={{ 
+                cursor: 'pointer',
+                '&:hover': { textDecoration: 'underline' }
+              }}
+              onClick={() => scrollToSection('demo')}
+            >
+              Demo
+            </Typography>
+            <Typography variant="body2" color="white">•</Typography>
+            <Typography 
+              variant="body2" 
+              color="white"
+              sx={{ 
+                cursor: 'pointer',
+                '&:hover': { textDecoration: 'underline' }
+              }}
+              onClick={() => scrollToSection('features')}
+            >
+              Features
+            </Typography>
+            <Typography variant="body2" color="white">•</Typography>
+            <Typography 
+              variant="body2" 
+              color="white"
+              sx={{ 
+                cursor: 'pointer',
+                '&:hover': { textDecoration: 'underline' }
+              }}
+              onClick={() => scrollToSection('faq')}
+            >
+              FAQs
+            </Typography>
+          </Box>
+          
+          {/* Copyright Text */}
+          <Typography variant="body2" color="white" sx={{ opacity: 0.9, fontWeight: 'medium', textAlign: 'center' }}>
+            Copyright &copy; PhysioFlow {new Date().getFullYear()}
+          </Typography>
+          
+          {/* GitHub Logo */}
+          <IconButton 
+            href="https://github.com/dhananjay2403/physioflow-ai.git" 
+            target="_blank"
+            sx={{ color: 'white' }}
+            aria-label="GitHub repository"
+          >
+            <GitHubIcon />
+          </IconButton>
+        </Box>
       </Container>
     </Box>
   );

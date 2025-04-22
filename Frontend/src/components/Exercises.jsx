@@ -10,7 +10,6 @@ import {
   Card,
   CardContent,
   CardMedia,
-//   useTheme,
 } from '@mui/material';
 import { Search, ArrowBack } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +19,6 @@ import { exerciseData } from '../utils/Exercises';
 const Exercises = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
-//   const theme = useTheme();
 
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
