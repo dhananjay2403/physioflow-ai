@@ -131,9 +131,9 @@ function Features() {
       image: 'https://via.placeholder.com/400x300?text=AI+Guidance',
     },
     {
-      title: 'Progress Tracking',
-      description: 'Monitor your improvement over time with detailed analytics and reports.',
-      image: 'https://via.placeholder.com/400x300?text=Progress+Tracking',
+      title: 'Exercise Modules',
+      description: 'Access a curated library of effective physiotherapy and fitness exercises.',
+      image: 'https://via.placeholder.com/400x300?text=Exercise+Modules',
     },
   ];
 
