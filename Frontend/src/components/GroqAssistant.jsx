@@ -1,172 +1,169 @@
-// src/components/GroqAssistant.js
 import React, { useState, useRef, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import SendIcon from '@mui/icons-material/Send';
-import Avatar from '@mui/material/Avatar';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
-import PersonIcon from '@mui/icons-material/Person';
-import CircularProgress from '@mui/material/CircularProgress';
-import { motion } from 'framer-motion';
+import {
+  Box,
+  Typography,
+  IconButton,
+  TextField,
+  Avatar,
+  Paper,
+} from '@mui/material';
+import { SendIcon, CloseIcon, AssistantIcon, UserIcon } from '../utils/GroqAssistant';
+import { useNavigate } from 'react-router-dom';
 
-export default function GroqAssistant() {
+const GroqAssistant = () => {
+  const navigate = useNavigate();
+  const messagesEndRef = useRef(null); // Ref to the end of messages
+
   const [messages, setMessages] = useState([
-    { id: 1, text: 'Hello! I\'m your PhysioFlow AI assistant. How can I help you today?', sender: 'bot' }
+    {
+      sender: 'groq',
+      text: 'Hi! I am Groq Assistant. How can I help you today?',
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    },
   ]);
   const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   const handleSend = () => {
-    if (input.trim() === '') return;
-    
-    // Add user message
-    const userMessage = { id: messages.length + 1, text: input, sender: 'user' };
-    setMessages([...messages, userMessage]);
+    if (!input.trim()) return;
+
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const newMessages = [
+      ...messages,
+      { sender: 'user', text: input.trim(), time },
+      {
+        sender: 'groq',
+        text: `You said: "${input.trim()}". (This is a placeholder reply.)`,
+        time,
+      },
+    ];
+    setMessages(newMessages);
     setInput('');
-    setIsLoading(true);
-    
-    // Simulate bot response after a delay
-    setTimeout(() => {
-      const botResponses = [
-        'I can help you track your exercise form and provide real-time feedback.',
-        'Would you like me to suggest some exercises for your specific condition?',
-        'Remember to maintain proper form during your exercises to prevent injury.',
-        'I notice you\'ve been making great progress with your rehabilitation program!',
-        'Let me analyze your movement pattern to provide personalized recommendations.',
-        'Based on your recent activity, I\'d suggest focusing on strengthening your core muscles.'
-      ];
-      
-      const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
-      const botMessage = { id: messages.length + 2, text: randomResponse, sender: 'bot' };
-      setMessages(prevMessages => [...prevMessages, botMessage]);
-      setIsLoading(false);
-    }, 1500);
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
+  // Scroll to bottom when messages update
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   return (
-    <Container maxWidth="md" sx={{ mt: 8, mb: 8 }}>
-      <Paper 
-        elevation={3} 
-        sx={{ 
-          p: 3, 
-          borderRadius: 2,
-          background: 'linear-gradient(145deg, #f8f9fa, #e8f0fe)'
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        background: 'url("/bg-blur.jpg") no-repeat center center / cover',
+        p: 2,
+      }}
+    >
+
+      <Paper
+        elevation={4}
+        sx={{
+          width: '100%',
+          maxWidth: 420,
+          height: '80vh',
+          borderRadius: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+          backgroundColor: '#f9f9f9',
         }}
       >
-        <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'primary.main' }}>
-          Groq AI Assistant
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 3 }}>
-          Ask me anything about your exercises, form, or rehabilitation program.
-        </Typography>
-        
-        <Paper 
-          elevation={1} 
-          sx={{ 
-            height: 400, 
-            mb: 2, 
-            p: 2, 
-            overflow: 'auto',
-            bgcolor: '#f8f9fa'
+        {/* Header */}
+        <Box
+          sx={{
+            p: 2,
+            backgroundColor: '#3f51b5',
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderTopLeftRadius: 12,
+            borderTopRightRadius: 12,
           }}
         >
-          {messages.map((message) => (
-            <motion.div
-              key={message.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+          <Typography variant="h6" fontWeight="bold">
+            Groq Assistant
+          </Typography>
+          <IconButton onClick={() => navigate(-1)} sx={{ color: 'white' }}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+
+        {/* Messages */}
+        <Box
+          sx={{
+            flex: 1,
+            overflowY: 'auto',
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1,
+          }}
+        >
+          {messages.map((msg, i) => (
+            <Box
+              key={i}
+              sx={{
+                display: 'flex',
+                flexDirection: msg.sender === 'user' ? 'row-reverse' : 'row',
+                alignItems: 'flex-start',
+                gap: 1,
+              }}
             >
-              <Box 
-                sx={{
-                  display: 'flex',
-                  justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start',
-                  mb: 2,
-                }}
-              >
-                <Box sx={{ display: 'flex', maxWidth: '70%' }}>
-                  {message.sender === 'bot' && (
-                    <Avatar sx={{ bgcolor: 'primary.main', mr: 1 }}>
-                      <SmartToyIcon />
-                    </Avatar>
-                  )}
-                  <Paper 
-                    elevation={1} 
-                    sx={{
-                      p: 2,
-                      borderRadius: 2,
-                      bgcolor: message.sender === 'user' ? 'primary.main' : 'background.paper',
-                      color: message.sender === 'user' ? 'white' : 'text.primary',
-                    }}
-                  >
-                    <Typography variant="body1">{message.text}</Typography>
-                  </Paper>
-                  {message.sender === 'user' && (
-                    <Avatar sx={{ bgcolor: 'grey.500', ml: 1 }}>
-                      <PersonIcon />
-                    </Avatar>
-                  )}
-                </Box>
-              </Box>
-            </motion.div>
-          ))}
-          {isLoading && (
-            <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
-              <Box sx={{ display: 'flex' }}>
-                <Avatar sx={{ bgcolor: 'primary.main', mr: 1 }}>
-                  <SmartToyIcon />
-                </Avatar>
-                <Paper elevation={1} sx={{ p: 2, borderRadius: 2, display: 'flex', alignItems: 'center' }}>
-                  <CircularProgress size={20} thickness={4} sx={{ mr: 1 }} />
-                  <Typography variant="body2" color="text.secondary">Thinking...</Typography>
+              <Avatar sx={{ bgcolor: msg.sender === 'user' ? '#2196f3' : '#673ab7' }}>
+                {msg.sender === 'user' ? <UserIcon /> : <AssistantIcon />}
+              </Avatar>
+              <Box>
+                <Paper
+                  elevation={1}
+                  sx={{
+                    p: 1.2,
+                    backgroundColor: msg.sender === 'user' ? '#e3f2fd' : '#ede7f6',
+                    maxWidth: 280,
+                    borderRadius: 2,
+                  }}
+                >
+                  <Typography variant="body2">{msg.text}</Typography>
                 </Paper>
+                <Typography variant="caption" color="text.secondary">
+                  {msg.time}
+                </Typography>
               </Box>
             </Box>
-          )}
+          ))}
+          {/* Auto-scroll target */}
           <div ref={messagesEndRef} />
-        </Paper>
-        
-        <Box sx={{ display: 'flex' }}>
+        </Box>
+
+        {/* Input Field */}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            p: 2,
+            borderTop: '1px solid #ddd',
+            gap: 1,
+          }}
+        >
           <TextField
             fullWidth
+            size="small"
+            placeholder="Ask me anything..."
             variant="outlined"
-            placeholder="Type your message..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            sx={{ mr: 1 }}
+            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           />
-          <Button 
-            variant="contained" 
-            color="primary" 
-            endIcon={<SendIcon />}
-            onClick={handleSend}
-            disabled={isLoading || input.trim() === ''}
-          >
-            Send
-          </Button>
+          <IconButton color="primary" onClick={handleSend}>
+            <SendIcon />
+          </IconButton>
         </Box>
       </Paper>
-    </Container>
+    </Box>
   );
-}
+};
+
+export default GroqAssistant;
