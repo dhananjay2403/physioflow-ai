@@ -10,11 +10,26 @@ import {
   Card,
   CardContent,
   CardMedia,
+  styled,
 } from '@mui/material';
 import { Search, ArrowBack } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { exerciseData } from '../utils/Exercises';
 
+const GradientBackground = styled(Box)(({ theme }) => ({
+  width: '100%',
+  minHeight: '100vh',
+  backgroundColor: '#f9f9f9', // Light background
+  backgroundImage: `
+    radial-gradient(circle at 70% 40%, rgba(255, 200, 100, 0.4), transparent 50%),
+    radial-gradient(circle at 30% 70%, rgba(255, 100, 150, 0.3), transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(100, 200, 255, 0.3), transparent 50%)
+  `,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  // paddingTop: theme.spacing(8),
+  // paddingBottom: theme.spacing(8),
+}));
 
 const Exercises = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,9 +44,9 @@ const Exercises = () => {
   const displayedExercises = searchQuery ? filteredExercises : exerciseData;
 
   return (
-    <Box sx={{ flexGrow: 1, bgcolor: '#f7f9fc', minHeight: '100vh' }}>
+    <GradientBackground sx={{ flexGrow: 1, bgcolor: '#f7f9fc', minHeight: '100vh' }}>
       {/* Top AppBar */}
-      <AppBar position="static" color="default" sx={{ boxShadow: 1 }}>
+      <AppBar position="static" color="default" sx={{ background: 'transparent',  boxShadow: 1 }}>
         <Toolbar>
           <IconButton edge="start" color="inherit" onClick={() => navigate(-1)} sx={{ mr: 2 }}>
             <ArrowBack />
@@ -50,7 +65,7 @@ const Exercises = () => {
                 width: { xs: 140, sm: 200, md: 250 },
             }}
             >
-            <Search sx={{ color: 'gray', mr: 1 }} />
+            <Search sx={{ color: 'dark gray', mr: 1 }} />
             <InputBase
                 placeholder="Search exercises…"
                 value={searchQuery}
@@ -103,7 +118,7 @@ const Exercises = () => {
           </Grid>
         )}
       </Grid>
-    </Box>
+    </GradientBackground>
   );
 };
 

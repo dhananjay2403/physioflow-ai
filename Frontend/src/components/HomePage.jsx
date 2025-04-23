@@ -22,6 +22,22 @@ import AppAppBar from './AppAppBar';
 import imgFeature1 from '../assets/img-features/1.jpg';
 import imgFeature2 from '../assets/img-features/2.jpg';
 import imgFeature3 from '../assets/img-features/3.webp';
+import { Divider, styled } from '@mui/material';
+
+const GradientBackground = styled(Box)(({ theme }) => ({
+  width: '100%',
+  minHeight: '100vh',
+  backgroundColor: '#f9f9f9', // Light background
+  backgroundImage: `
+    radial-gradient(circle at 70% 40%, rgba(255, 200, 100, 0.4), transparent 50%),
+    radial-gradient(circle at 30% 70%, rgba(255, 100, 150, 0.3), transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(100, 200, 255, 0.3), transparent 50%)
+  `,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  // paddingTop: theme.spacing(8),
+  // paddingBottom: theme.spacing(8),
+}));
 
 // Hero section
 function Hero() {
@@ -203,7 +219,7 @@ function Hero() {
     <Box
       id="home"
       sx={{
-        bgcolor: 'background.paper',
+        // bgcolor: 'background.paper',
         pt: { xs: 14, sm: 16, md: 16, lg: 16 },
         pb: { xs: 8, md: 14 },
         minHeight: '65vh',
@@ -219,12 +235,12 @@ function Hero() {
           inset: 0,
           zIndex: 0,
           pointerEvents: 'none',
-          background:
-            'radial-gradient(circle at 20% 30%, rgba(44,90,233,0.07) 0%, transparent 70%),' +
-            'radial-gradient(circle at 80% 70%, rgba(44,90,233,0.10) 0%, transparent 70%),' +
-            'linear-gradient(120deg, rgba(232,240,254,0.7) 0%, rgba(248,249,250,0.7) 100%)',
-          opacity: 1,
-          transition: 'opacity 0.5s',
+          // background:
+          //   'radial-gradient(circle at 20% 30%, rgba(44,90,233,0.07) 0%, transparent 70%),' +
+          //   'radial-gradient(circle at 80% 70%, rgba(44,90,233,0.10) 0%, transparent 70%),' +
+          //   'linear-gradient(120deg, rgba(232,240,254,0.7) 0%, rgba(248,249,250,0.7) 100%)',
+          // opacity: 1,
+          // transition: 'opacity 0.5s',
         },
         '::after': {
           content: '""',
@@ -232,10 +248,10 @@ function Hero() {
           inset: 0,
           zIndex: 1,
           pointerEvents: 'none',
-          background:
-            'repeating-linear-gradient(135deg, rgba(44,90,233,0.03) 0px, rgba(44,90,233,0.03) 2px, transparent 2px, transparent 16px)',
-          opacity: 0.6,
-          transition: 'opacity 0.5s',
+          // background:
+          //   'repeating-linear-gradient(135deg, rgba(44,90,233,0.03) 0px, rgba(44,90,233,0.03) 2px, transparent 2px, transparent 16px)',
+          // opacity: 0.6,
+          // transition: 'opacity 0.5s',
         },
       }}
     >
@@ -246,7 +262,7 @@ function Hero() {
           inset: 0,
           zIndex: 0,
           pointerEvents: 'none',
-          backgroundImage: 'radial-gradient(rgba(44,90,233,0.07) 1px, transparent 1px)',
+          // backgroundImage: 'radial-gradient(rgba(44,90,233,0.07) 1px, transparent 1px)',
           backgroundSize: '28px 28px',
         }} />
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
@@ -256,11 +272,13 @@ function Hero() {
                 <Typography
                   component="h1"
                   variant="h2"
-                  fontWeight={900}
+                  // fontWeight={900}
                   sx={{
                     color: 'black',
                     mb: 0.5,
-                    fontSize: { xs: '2.6rem', md: '4.2rem' },
+                    // fontSize: { xs: '2.6rem', md: '4.2rem' },
+                    fontWeight: 'bold',
+                    textShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
                     letterSpacing: 0.5,
                     lineHeight: 1.08,
                     display: 'inline-block',
@@ -353,15 +371,23 @@ function VideoDemo() {
     <Box
       id="demo"
       sx={{ 
-        background: 'linear-gradient(180deg, #e8f0fe 0%, #f8f9fa 100%)',
+        // background: 'linear-gradient(180deg, #e8f0fe 0%, #f8f9fa 100%)',
         py: 8,
         scrollMarginTop: { xs: 13, sm: 16 }
       }}
     >
       <Container maxWidth="lg">
-        <Typography variant="h4" align="center" gutterBottom>
-          See PhysioFlow in Action
-        </Typography>
+      <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{
+              fontWeight: 'bold',
+              textShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', // diffused shadow
+            }}
+          >
+            See PhysioFlow In Action
+          </Typography>
         <Box
           sx={{
             width: '100%',
@@ -453,7 +479,15 @@ function Features() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{
+              fontWeight: 'bold',
+              textShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', // diffused shadow
+            }}
+          >
             Key Features
           </Typography>
         </motion.div>
@@ -579,7 +613,15 @@ function FAQ() {
             damping: 14
           }}
         >
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{
+              fontWeight: 'bold',
+              textShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', // diffused shadow
+            }}
+          >
             Frequently Asked Questions
           </Typography>
         </motion.div>
@@ -594,14 +636,14 @@ function FAQ() {
             >
               <Box
                 sx={{
-                  backgroundColor: 'primary.main',
+                  backgroundColor: 'primary.light',
                   color: 'white',
                   borderTopLeftRadius: 8,
                   borderTopRightRadius: 8,
                   borderBottomLeftRadius: expanded === faq.id ? 0 : 8,
                   borderBottomRightRadius: expanded === faq.id ? 0 : 8,
                   boxShadow: 2,
-                  p: 2,
+                  p: 1.5,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
@@ -611,7 +653,7 @@ function FAQ() {
                 }}
                 onClick={() => handleExpand(faq.id)}
               >
-                <Typography variant="subtitle2" color="white">
+                <Typography variant="subtitle1" color="white">
                   {faq.question}
                 </Typography>
                 <Box sx={{ 
@@ -658,7 +700,9 @@ function Footer() {
   };
 
   return (
-    <Box sx={{ bgcolor: 'primary.main', py: 3, color: 'white' }}>
+    <Box sx={{ 
+      // bgcolor: 'primary.dark', 
+      py: 3, color: 'black' }}>
       <Container maxWidth="lg">
         <Box sx={{ 
           display: 'flex', 
@@ -671,7 +715,7 @@ function Footer() {
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
             <Typography 
               variant="body2" 
-              color="white" 
+              color="black" 
               sx={{ 
                 cursor: 'pointer',
                 '&:hover': { textDecoration: 'underline' }
@@ -680,10 +724,10 @@ function Footer() {
             >
               Home
             </Typography>
-            <Typography variant="body2" color="white">•</Typography>
+            <Typography variant="body2" color="black">•</Typography>
             <Typography 
               variant="body2" 
-              color="white"
+              color="black"
               sx={{ 
                 cursor: 'pointer',
                 '&:hover': { textDecoration: 'underline' }
@@ -692,10 +736,10 @@ function Footer() {
             >
               Demo
             </Typography>
-            <Typography variant="body2" color="white">•</Typography>
+            <Typography variant="body2" color="black">•</Typography>
             <Typography 
               variant="body2" 
-              color="white"
+              color="black"
               sx={{ 
                 cursor: 'pointer',
                 '&:hover': { textDecoration: 'underline' }
@@ -704,10 +748,10 @@ function Footer() {
             >
               Features
             </Typography>
-            <Typography variant="body2" color="white">•</Typography>
+            <Typography variant="body2" color="black">•</Typography>
             <Typography 
               variant="body2" 
-              color="white"
+              color="black"
               sx={{ 
                 cursor: 'pointer',
                 '&:hover': { textDecoration: 'underline' }
@@ -719,7 +763,7 @@ function Footer() {
           </Box>
           
           {/* Copyright Text */}
-          <Typography variant="body2" color="white" sx={{ opacity: 0.9, fontWeight: 'medium', textAlign: 'center' }}>
+          <Typography variant="body2" color="black" sx={{ opacity: 0.9, fontWeight: 'medium', textAlign: 'center' }}>
             Copyright &copy; PhysioFlow {new Date().getFullYear()}
           </Typography>
           
@@ -727,7 +771,7 @@ function Footer() {
           <IconButton 
             href="https://github.com/dhananjay2403/physioflow-ai.git" 
             target="_blank"
-            sx={{ color: 'white' }}
+            sx={{ color: 'black' }}
             aria-label="GitHub repository"
           >
             <GitHubIcon />
@@ -740,16 +784,20 @@ function Footer() {
 
 export default function HomePage() {
   return (
-    <Box>
+    <GradientBackground>
       <AppAppBar />
       <main>
         <Hero />
+        <Divider></Divider>
         <VideoDemo />
+        <Divider></Divider>
         <Features />
+        <Divider></Divider>
         {/* <Testimonials /> */}
         <FAQ />
       </main>
+      <Divider></Divider>
       <Footer />
-    </Box>
+    </GradientBackground>
   );
 }
