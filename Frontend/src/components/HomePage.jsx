@@ -212,6 +212,7 @@ function Hero() {
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
+        scrollMarginTop: { xs: 13, sm: 16 }
       }}
     >
       {/* Subtle dotted background accent */}
@@ -327,7 +328,8 @@ function VideoDemo() {
       id="demo"
       sx={{ 
         background: 'linear-gradient(180deg, #e8f0fe 0%, #f8f9fa 100%)',
-        py: 8 
+        py: 8,
+        scrollMarginTop: { xs: 13, sm: 16 }
       }}
     >
       <Container maxWidth="lg">
@@ -418,14 +420,14 @@ function Features() {
   };
 
   return (
-    <Box sx={{ py: 8 }} ref={ref}>
+    <Box id="features" sx={{ py: 8, scrollMarginTop: { xs: 13, sm: 16 } }} ref={ref}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <Typography variant="h4" align="center" gutterBottom id="features">
+          <Typography variant="h4" align="center" gutterBottom>
             Key Features
           </Typography>
         </motion.div>
@@ -540,19 +542,18 @@ function FAQ() {
   };
 
   return (
-    <Box sx={{ py: 8 }} ref={faqRef}>
+    <Box id="faq" sx={{ py: 8, scrollMarginTop: { xs: 13, sm: 16 } }} ref={faqRef}>
       <Container maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={faqInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ 
             type: 'spring',
-            stiffness: 50,
-            damping: 10,
-            duration: 0.8 
+            stiffness: 60,
+            damping: 14
           }}
         >
-          <Typography variant="h4" align="center" gutterBottom id="faq">
+          <Typography variant="h4" align="center" gutterBottom>
             Frequently Asked Questions
           </Typography>
         </motion.div>
