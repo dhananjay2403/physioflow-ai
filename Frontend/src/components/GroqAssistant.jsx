@@ -95,7 +95,7 @@ const GroqAssistant = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '100vh',
-        background: 'url("/bg-blur.jpg") no-repeat center center / cover',
+        background: '#e8dbe8',
         p: 2,
       }}
     >
@@ -117,7 +117,7 @@ const GroqAssistant = () => {
         <Box
           sx={{
             p: 2,
-            backgroundColor: '#3f51b5',
+            backgroundColor: '#6e4670',
             color: 'white',
             display: 'flex',
             justifyContent: 'space-between',
@@ -129,7 +129,7 @@ const GroqAssistant = () => {
           <Typography variant="h6" fontWeight="bold">
             Groq Assistant
           </Typography>
-          <IconButton onClick={() => navigate(-1)} sx={{ color: 'white' }}>
+          <IconButton onClick={() => navigate(-1)} sx={{ color: 'white'}}>
             <CloseIcon />
           </IconButton>
         </Box>
@@ -155,7 +155,7 @@ const GroqAssistant = () => {
                 gap: 1,
               }}
             >
-              <Avatar sx={{ bgcolor: msg.sender === 'user' ? '#2196f3' : '#673ab7' }}>
+              <Avatar sx={{ bgcolor: msg.sender === 'user' ? '#2196f3' : '#6e4670' }}>
                 {msg.sender === 'user' ? <UserIcon /> : <AssistantIcon />}
               </Avatar>
               <Box>
@@ -199,7 +199,7 @@ const GroqAssistant = () => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           />
-          <IconButton color="primary" onClick={handleSend}>
+          <IconButton color="#6e4670" onClick={handleSend}>
             <SendIcon />
           </IconButton>
         </Box>

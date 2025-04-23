@@ -61,22 +61,22 @@ export default function AppAppBar() {
             justifyContent: 'center',
             gap: 3 
           }}>
-              <Button variant="text" color="info" size="small">
+              <Button variant="text" size="small" sx={{ color: '#6e4670' }}>
                 Home
               </Button>
-              {/* <Button variant="text" color="info" size="small">
+              {/* <Button variant="text" size="small" sx={{ color: '#6e4670' }}>
                 Dashboard
               </Button> */}
-              <Button variant="text" color="info" size="small">
+              <Button variant="text" size="small" sx={{ color: '#6e4670' }}>
                 Groq Assistant
               </Button>
-              <Button variant="text" color="info" size="small">
+              <Button variant="text" size="small" sx={{ color: '#6e4670' }}>
                 Exercises
               </Button>
-              <Button variant="text" color="info" size="small">
+              <Button variant="text" size="small" sx={{ color: '#6e4670' }}>
                 About Us
               </Button>
-              {/* <Button variant="text" color="info" size="small">
+              {/* <Button variant="text" size="small" sx={{ color: '#6e4670' }}>
                 Feedback
               </Button> */}
             </Box>
@@ -88,10 +88,10 @@ export default function AppAppBar() {
               ml: 4, // Add margin left for spacing from middle links
             }}
           >
-            <Button color="primary" variant="text" size="small">
+            <Button variant="text" size="small" sx={{ color: '#6e4670' }}>
               Sign in
             </Button>
-            <Button color="primary" variant="contained" size="small">
+            <Button variant="contained" size="small" sx={{ backgroundColor: '#6e4670' }}>
               Sign up
             </Button>
           </Box>
@@ -121,20 +121,20 @@ export default function AppAppBar() {
                   </IconButton>
                 </Box>
 
-                <MenuItem>Home</MenuItem>
+                <MenuItem sx={{ color: '#6e4670' }}>Home</MenuItem>
                 {/* <MenuItem>Dashboard</MenuItem> */}
-                <MenuItem>Groq Assistant</MenuItem>
-                <MenuItem>Exercises</MenuItem>
-                <MenuItem>About Us</MenuItem>
+                <MenuItem sx={{ color: '#6e4670' }}>Groq Assistant</MenuItem>
+                <MenuItem sx={{ color: '#6e4670' }}>Exercises</MenuItem>
+                <MenuItem sx={{ color: '#6e4670' }}>About Us</MenuItem>
                 {/* <MenuItem>Feedback</MenuItem> */}
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
-                  <Button color="primary" variant="contained" fullWidth>
+                  <Button variant="contained" fullWidth sx={{ backgroundColor: '#6e4670' }}>
                     Sign up
                   </Button>
                 </MenuItem>
                 <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth>
+                  <Button variant="outlined" fullWidth sx={{ color: '#6e4670' }}>
                     Sign in
                   </Button>
                 </MenuItem>

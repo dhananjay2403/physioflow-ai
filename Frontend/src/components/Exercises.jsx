@@ -51,7 +51,7 @@ const Exercises = () => {
           <IconButton edge="start" color="inherit" onClick={() => navigate(-1)} sx={{ mr: 2 }}>
             <ArrowBack />
           </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1}}>
             Exercises
           </Typography>
           <Box

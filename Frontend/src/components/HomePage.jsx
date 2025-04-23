@@ -314,11 +314,11 @@ function Hero() {
                     variant="contained"
                     size="large"
                     sx={{
-                      bgcolor: '#2c5ae9',
+                      bgcolor: '#6e4670',
                       color: '#fff',
                       fontWeight: 700,
                       boxShadow: 3,
-                      '&:hover': { bgcolor: '#1d3ea6' }
+                      '&:hover': { bgcolor: '#c57196' }
                     }}
                   >
                     Try Now
@@ -327,10 +327,10 @@ function Hero() {
                     variant="outlined"
                     size="large"
                     sx={{
-                      borderColor: '#2c5ae9',
-                      color: '#2c5ae9',
+                      borderColor: '#6e4670',
+                      color: '#6e4670',
                       fontWeight: 700,
-                      '&:hover': { borderColor: '#1d3ea6', color: '#1d3ea6' }
+                      '&:hover': { borderColor: '#c57196', color: '#c57196' }
                     }}
                   >
                     Learn More
@@ -442,8 +442,8 @@ function Features() {
       image: imgFeature2,
     },
     {
-      title: 'Personalized Progress Tracking',
-      description: 'Monitor your improvement over time and stay motivated with visual analytics.',
+      title: 'Curated List of Exercises',
+      description: 'Choose which exercise to practise from our hand-picked list of physiotherapy movements.',
       image: imgFeature3,
     },
   ];
@@ -527,7 +527,9 @@ function Features() {
                       sx={{ objectFit: 'cover', width: '100%' }}
                     />
                     <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', p: 1.5, minHeight: 0 }}>
-                      <Typography gutterBottom variant="h5" component="h2" sx={{ color: '#2c5ae9', fontWeight: 700, textAlign: 'center', mb: 0.5, fontSize: 22, lineHeight: 1.2 }}>
+                      <Typography gutterBottom variant="h5" component="h2" sx={{ 
+                        textShadow: '0px 4px 5px rgba(0, 0, 0, 0.2)', // diffused shadow
+                        color: '#6e4670', fontWeight: 700, textAlign: 'center', mb: 0.5, fontSize: 22, lineHeight: 1.2 }}>
                         {feature.title}
                       </Typography>
                       <Typography sx={{ fontSize: 14.5, color: 'text.secondary', textAlign: 'center', mt: 0, lineHeight: 1.3 }}>
@@ -636,7 +638,7 @@ function FAQ() {
             >
               <Box
                 sx={{
-                  backgroundColor: 'primary.light',
+                  backgroundColor: '#9a629d',
                   color: 'white',
                   borderTopLeftRadius: 8,
                   borderTopRightRadius: 8,
@@ -666,7 +668,7 @@ function FAQ() {
               <Collapse in={expanded === faq.id} timeout={400} easing={{ enter: 'cubic-bezier(0.4,0,0.2,1)', exit: 'cubic-bezier(0.4,0,0.2,1)' }}>
                 <Box
                   sx={{
-                    backgroundColor: 'primary.main',
+                    backgroundColor: '#b48bb6',
                     color: 'white',
                     borderBottomLeftRadius: 8,
                     borderBottomRightRadius: 8,
