@@ -19,6 +19,10 @@ import Collapse from '@mui/material/Collapse';
 // Import navbar
 import AppAppBar from './AppAppBar';
 
+import imgFeature1 from '../assets/img-features/1.jpg';
+import imgFeature2 from '../assets/img-features/2.jpg';
+import imgFeature3 from '../assets/img-features/3.webp';
+
 // Hero section
 function Hero() {
   // --- Dynamic Stick Figure: Moves Left and Right, 5+ Distinct Motions ---
@@ -376,17 +380,17 @@ function Features() {
     {
       title: 'Real-time Movement Analysis',
       description: 'Get instant feedback on your exercise form with advanced computer vision.',
-      image: 'https://via.placeholder.com/400x300?text=Movement+Analysis',
+      image: imgFeature1,
     },
     {
       title: 'AI-Powered Guidance',
       description: 'Groq AI provides personalized guidance and customized exercise plans.',
-      image: 'https://via.placeholder.com/400x300?text=AI+Guidance',
+      image: imgFeature2,
     },
     {
-      title: 'Exercise Modules',
-      description: 'Access a curated library of effective physiotherapy and fitness exercises.',
-      image: 'https://via.placeholder.com/400x300?text=Exercise+Modules',
+      title: 'Personalized Progress Tracking',
+      description: 'Monitor your improvement over time and stay motivated with visual analytics.',
+      image: imgFeature3,
     },
   ];
 
@@ -437,10 +441,14 @@ function Features() {
                 <motion.div variants={itemVariants}>
                   <Card
                     sx={{
-                      height: '100%',
+                      height: 340,
+                      minHeight: 340,
+                      maxHeight: 340,
                       display: 'flex',
                       flexDirection: 'column',
                       boxShadow: 3,
+                      alignItems: 'stretch',
+                      justifyContent: 'flex-start',
                       '&:hover': {
                         transform: 'translateY(-8px)',
                         transition: 'transform 0.3s ease-in-out',
@@ -451,15 +459,16 @@ function Features() {
                   >
                     <CardMedia
                       component="img"
-                      height="200"
+                      height="220"
                       image={feature.image}
                       alt={feature.title}
+                      sx={{ objectFit: 'cover', width: '100%' }}
                     />
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography gutterBottom variant="h5" component="h2" sx={{ color: '#2c5ae9' }}>
+                    <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', p: 1.5, minHeight: 0 }}>
+                      <Typography gutterBottom variant="h5" component="h2" sx={{ color: '#2c5ae9', fontWeight: 700, textAlign: 'center', mb: 0.5, fontSize: 22, lineHeight: 1.2 }}>
                         {feature.title}
                       </Typography>
-                      <Typography>
+                      <Typography sx={{ fontSize: 14.5, color: 'text.secondary', textAlign: 'center', mt: 0, lineHeight: 1.3 }}>
                         {feature.description}
                       </Typography>
                     </CardContent>
