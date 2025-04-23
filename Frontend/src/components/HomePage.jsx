@@ -9,55 +9,358 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Divider from '@mui/material/Divider';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+// import Divider from '@mui/material/Divider';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
 
 // Import navbar
 import AppAppBar from './AppAppBar';
 
+import imgFeature1 from '../assets/img-features/1.jpg';
+import imgFeature2 from '../assets/img-features/2.jpg';
+import imgFeature3 from '../assets/img-features/3.webp';
+import { Divider, styled } from '@mui/material';
+
+const GradientBackground = styled(Box)(({ theme }) => ({
+  width: '100%',
+  minHeight: '100vh',
+  backgroundColor: '#f9f9f9', // Light background
+  backgroundImage: `
+    radial-gradient(circle at 70% 40%, rgba(255, 200, 100, 0.4), transparent 50%),
+    radial-gradient(circle at 30% 70%, rgba(255, 100, 150, 0.3), transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(100, 200, 255, 0.3), transparent 50%)
+  `,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  // paddingTop: theme.spacing(8),
+  // paddingBottom: theme.spacing(8),
+}));
+
 // Hero section
 function Hero() {
+  // --- Dynamic Stick Figure: Moves Left and Right, 5+ Distinct Motions ---
+  // Motions: jumping jack, squat, moonwalk (MJ, with lateral movement), side step, arm wave
+
+  // Keyframes for dynamic motions (as before)
+  const POSE_JJACK_CLOSED = [
+    { x: 0.5, y: 0.13 }, { x: 0.5, y: 0.22 }, { x: 0.44, y: 0.28 }, { x: 0.56, y: 0.28 },
+    { x: 0.44, y: 0.41 }, { x: 0.56, y: 0.41 }, { x: 0.45, y: 0.55 }, { x: 0.55, y: 0.55 },
+    { x: 0.5, y: 0.44 }, { x: 0.5, y: 0.6 }, { x: 0.47, y: 0.7 }, { x: 0.53, y: 0.7 },
+    { x: 0.47, y: 0.88 }, { x: 0.53, y: 0.88 }, { x: 0.47, y: 0.98 }, { x: 0.53, y: 0.98 }
+  ];
+  const POSE_JJACK_OPEN = [
+    { x: 0.5, y: 0.13 }, { x: 0.5, y: 0.22 }, { x: 0.36, y: 0.20 }, { x: 0.64, y: 0.20 },
+    { x: 0.32, y: 0.08 }, { x: 0.68, y: 0.08 }, { x: 0.35, y: 0.32 }, { x: 0.65, y: 0.32 },
+    { x: 0.5, y: 0.44 }, { x: 0.5, y: 0.6 }, { x: 0.43, y: 0.8 }, { x: 0.57, y: 0.8 },
+    { x: 0.39, y: 0.98 }, { x: 0.61, y: 0.98 }, { x: 0.39, y: 0.97 }, { x: 0.61, y: 0.97 }
+  ];
+  const POSE_SQUAT_UP = [
+    { x: 0.5, y: 0.13 }, { x: 0.5, y: 0.22 }, { x: 0.44, y: 0.28 }, { x: 0.56, y: 0.28 },
+    { x: 0.44, y: 0.41 }, { x: 0.56, y: 0.41 }, { x: 0.45, y: 0.55 }, { x: 0.55, y: 0.55 },
+    { x: 0.5, y: 0.44 }, { x: 0.5, y: 0.6 }, { x: 0.47, y: 0.7 }, { x: 0.53, y: 0.7 },
+    { x: 0.47, y: 0.88 }, { x: 0.53, y: 0.88 }, { x: 0.47, y: 0.98 }, { x: 0.53, y: 0.98 }
+  ];
+  const POSE_SQUAT_DOWN = [
+    { x: 0.5, y: 0.13 }, { x: 0.5, y: 0.22 }, { x: 0.44, y: 0.28 }, { x: 0.56, y: 0.28 },
+    { x: 0.42, y: 0.46 }, { x: 0.58, y: 0.46 }, { x: 0.40, y: 0.63 }, { x: 0.60, y: 0.63 },
+    { x: 0.5, y: 0.48 }, { x: 0.5, y: 0.7 }, { x: 0.47, y: 0.8 }, { x: 0.53, y: 0.8 },
+    { x: 0.45, y: 0.94 }, { x: 0.55, y: 0.94 }, { x: 0.45, y: 0.99 }, { x: 0.55, y: 0.99 }
+  ];
+  // Michael Jackson Moonwalk: 5 keyframes, will shift horizontally
+  const MOONWALK = [
+    // 1: Lean back, left foot forward, right foot flat
+    [
+      { x: 0.5, y: 0.13 }, { x: 0.5, y: 0.22 }, { x: 0.48, y: 0.28 }, { x: 0.54, y: 0.28 },
+      { x: 0.44, y: 0.38 }, { x: 0.56, y: 0.38 }, { x: 0.43, y: 0.56 }, { x: 0.57, y: 0.56 },
+      { x: 0.5, y: 0.44 }, { x: 0.5, y: 0.6 }, { x: 0.47, y: 0.7 }, { x: 0.53, y: 0.7 },
+      { x: 0.44, y: 0.88 }, { x: 0.53, y: 0.88 }, { x: 0.47, y: 0.98 }, { x: 0.53, y: 0.98 }
+    ],
+    // 2: Slide left foot back, right foot starts to lift
+    [
+      { x: 0.5, y: 0.13 }, { x: 0.5, y: 0.22 }, { x: 0.49, y: 0.28 }, { x: 0.53, y: 0.28 },
+      { x: 0.46, y: 0.38 }, { x: 0.54, y: 0.38 }, { x: 0.45, y: 0.56 }, { x: 0.55, y: 0.56 },
+      { x: 0.5, y: 0.44 }, { x: 0.5, y: 0.6 }, { x: 0.49, y: 0.7 }, { x: 0.51, y: 0.7 },
+      { x: 0.48, y: 0.88 }, { x: 0.52, y: 0.88 }, { x: 0.49, y: 0.98 }, { x: 0.51, y: 0.98 }
+    ],
+    // 3: Both feet together, upright
+    [
+      { x: 0.5, y: 0.13 }, { x: 0.5, y: 0.22 }, { x: 0.5, y: 0.28 }, { x: 0.5, y: 0.28 },
+      { x: 0.5, y: 0.38 }, { x: 0.5, y: 0.38 }, { x: 0.5, y: 0.56 }, { x: 0.5, y: 0.56 },
+      { x: 0.5, y: 0.44 }, { x: 0.5, y: 0.6 }, { x: 0.5, y: 0.7 }, { x: 0.5, y: 0.7 },
+      { x: 0.5, y: 0.88 }, { x: 0.5, y: 0.88 }, { x: 0.5, y: 0.98 }, { x: 0.5, y: 0.98 }
+    ],
+    // 4: Slide right foot back, left foot starts to lift
+    [
+      { x: 0.5, y: 0.13 }, { x: 0.5, y: 0.22 }, { x: 0.51, y: 0.28 }, { x: 0.49, y: 0.28 },
+      { x: 0.54, y: 0.38 }, { x: 0.46, y: 0.38 }, { x: 0.53, y: 0.56 }, { x: 0.47, y: 0.56 },
+      { x: 0.5, y: 0.44 }, { x: 0.5, y: 0.6 }, { x: 0.51, y: 0.7 }, { x: 0.49, y: 0.7 },
+      { x: 0.52, y: 0.88 }, { x: 0.48, y: 0.88 }, { x: 0.51, y: 0.98 }, { x: 0.49, y: 0.98 }
+    ],
+    // 5: Lean back, right foot forward, left foot flat
+    [
+      { x: 0.5, y: 0.13 }, { x: 0.5, y: 0.22 }, { x: 0.52, y: 0.28 }, { x: 0.48, y: 0.28 },
+      { x: 0.56, y: 0.38 }, { x: 0.44, y: 0.38 }, { x: 0.57, y: 0.56 }, { x: 0.43, y: 0.56 },
+      { x: 0.5, y: 0.44 }, { x: 0.5, y: 0.6 }, { x: 0.53, y: 0.7 }, { x: 0.47, y: 0.7 },
+      { x: 0.53, y: 0.88 }, { x: 0.44, y: 0.88 }, { x: 0.53, y: 0.98 }, { x: 0.47, y: 0.98 }
+    ],
+  ];
+  // Side step (left/right): arms swing, body shifts
+  const POSE_SIDESTEP_CENTRE = POSE_JJACK_CLOSED.map(j => ({...j}));
+  const POSE_SIDESTEP_LEFT = POSE_JJACK_CLOSED.map(j => ({...j, x: j.x - 0.08}));
+  const POSE_SIDESTEP_RIGHT = POSE_JJACK_CLOSED.map(j => ({...j, x: j.x + 0.08}));
+  POSE_SIDESTEP_LEFT[2].x -= 0.03; POSE_SIDESTEP_LEFT[3].x -= 0.03; // arms
+  POSE_SIDESTEP_RIGHT[2].x += 0.03; POSE_SIDESTEP_RIGHT[3].x += 0.03;
+  // Arm wave (right arm up, left arm up)
+  const POSE_ARMWAVE_RIGHT = POSE_JJACK_CLOSED.map((j, i) => i===3 ? {...j, y: j.y-0.12} : j);
+  const POSE_ARMWAVE_LEFT = POSE_JJACK_CLOSED.map((j, i) => i===2 ? {...j, y: j.y-0.12} : j);
+
+  const BONES = [
+    [0,1],[1,2],[1,3],[2,4],[3,5],[4,6],[5,7],[1,8],[8,9],[9,10],[9,11],[10,12],[11,13],[12,14],[13,15]
+  ];
+
+  // Animation phases: all dynamic, with horizontal movement for moonwalk and sidestep
+  // Each phase: [poseA, poseB, duration(frames), xShiftA, xShiftB]
+  const ANIMATION_PHASES = [
+    [POSE_JJACK_CLOSED, POSE_JJACK_OPEN, 22, 0, 0],
+    [POSE_JJACK_OPEN, POSE_JJACK_CLOSED, 22, 0, 0],
+    [POSE_SQUAT_UP, POSE_SQUAT_DOWN, 18, 0, 0],
+    [POSE_SQUAT_DOWN, POSE_SQUAT_UP, 18, 0, 0],
+    // Moonwalk left
+    [MOONWALK[0], MOONWALK[1], 14, 0, -0.06],
+    [MOONWALK[1], MOONWALK[2], 14, -0.06, -0.12],
+    [MOONWALK[2], MOONWALK[3], 14, -0.12, -0.18],
+    [MOONWALK[3], MOONWALK[4], 14, -0.18, -0.24],
+    [MOONWALK[4], MOONWALK[0], 14, -0.24, 0], // snap back to center
+    // Sidestep right
+    [POSE_SIDESTEP_CENTRE, POSE_SIDESTEP_RIGHT, 16, 0, 0.10],
+    [POSE_SIDESTEP_RIGHT, POSE_SIDESTEP_CENTRE, 16, 0.10, 0],
+    // Sidestep left
+    [POSE_SIDESTEP_CENTRE, POSE_SIDESTEP_LEFT, 16, 0, -0.10],
+    [POSE_SIDESTEP_LEFT, POSE_SIDESTEP_CENTRE, 16, -0.10, 0],
+    // Arm wave right
+    [POSE_JJACK_CLOSED, POSE_ARMWAVE_RIGHT, 14, 0, 0],
+    [POSE_ARMWAVE_RIGHT, POSE_JJACK_CLOSED, 14, 0, 0],
+    // Arm wave left
+    [POSE_JJACK_CLOSED, POSE_ARMWAVE_LEFT, 14, 0, 0],
+    [POSE_ARMWAVE_LEFT, POSE_JJACK_CLOSED, 14, 0, 0],
+  ];
+
+  const svgRef = React.useRef();
+  const animationRef = React.useRef();
+  const phaseIndexRef = React.useRef(0);
+  const morphProgressRef = React.useRef(0);
+
+  React.useEffect(() => {
+    function animate() {
+      const svg = svgRef.current;
+      if (!svg) return;
+      const [poseA, poseB, duration, xShiftA = 0, xShiftB = 0] = ANIMATION_PHASES[phaseIndexRef.current];
+      let t = morphProgressRef.current / duration;
+      const xShift = xShiftA * (1-t) + xShiftB * t;
+      for (let i = 0; i < poseA.length; i++) {
+        const x = (poseA[i].x * (1-t) + poseB[i].x * t) + xShift;
+        const y = poseA[i].y * (1-t) + poseB[i].y * t;
+        const size = 380;
+        const cx = x * size + 60;
+        const cy = y * size + 40;
+        const dot = svg.querySelector(`#joint0_${i}`);
+        if (dot) {
+          dot.setAttribute('cx', cx);
+          dot.setAttribute('cy', cy);
+        }
+      }
+      // Bones
+      for (let b = 0; b < BONES.length; b++) {
+        const [i, j] = BONES[b];
+        const x1 = (poseA[i].x * (1-t) + poseB[i].x * t) + xShift;
+        const y1 = poseA[i].y * (1-t) + poseB[i].y * t;
+        const x2 = (poseA[j].x * (1-t) + poseB[j].x * t) + xShift;
+        const y2 = poseA[j].y * (1-t) + poseB[j].y * t;
+        const size = 380;
+        const x1p = x1 * size + 60;
+        const y1p = y1 * size + 40;
+        const x2p = x2 * size + 60;
+        const y2p = y2 * size + 40;
+        const line = svg.querySelector(`#bone0_${b}`);
+        if (line) {
+          line.setAttribute('x1', x1p);
+          line.setAttribute('y1', y1p);
+          line.setAttribute('x2', x2p);
+          line.setAttribute('y2', y2p);
+        }
+      }
+      // Head
+      const head = svg.querySelector(`#head0`);
+      if (head) {
+        const x = (poseA[0].x * (1-t) + poseB[0].x * t) + xShift;
+        const y = poseA[0].y * (1-t) + poseB[0].y * t;
+        const size = 380;
+        const cx = x * size + 60;
+        const cy = y * size + 40;
+        head.setAttribute('cx', cx);
+        head.setAttribute('cy', cy);
+      }
+      morphProgressRef.current++;
+      if (morphProgressRef.current >= duration) {
+        morphProgressRef.current = 0;
+        phaseIndexRef.current = (phaseIndexRef.current + 1) % ANIMATION_PHASES.length;
+      }
+      animationRef.current = requestAnimationFrame(animate);
+    }
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current);
+  }, []);
+
+  // Render a single animated stick figure
   return (
     <Box
+      id="home"
       sx={{
-        background: 'linear-gradient(180deg, #f8f9fa 0%, #e8f0fe 100%)',
-        pt: 16, // Increased from 8 to 16 to account for navbar height
-        pb: 6,
-        mt: 4, // Added margin top
+        // bgcolor: 'background.paper',
+        pt: { xs: 14, sm: 16, md: 16, lg: 16 },
+        pb: { xs: 8, md: 14 },
+        minHeight: '65vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        scrollMarginTop: { xs: 13, sm: 16 },
+        '::before': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          // background:
+          //   'radial-gradient(circle at 20% 30%, rgba(44,90,233,0.07) 0%, transparent 70%),' +
+          //   'radial-gradient(circle at 80% 70%, rgba(44,90,233,0.10) 0%, transparent 70%),' +
+          //   'linear-gradient(120deg, rgba(232,240,254,0.7) 0%, rgba(248,249,250,0.7) 100%)',
+          // opacity: 1,
+          // transition: 'opacity 0.5s',
+        },
+        '::after': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+          // background:
+          //   'repeating-linear-gradient(135deg, rgba(44,90,233,0.03) 0px, rgba(44,90,233,0.03) 2px, transparent 2px, transparent 16px)',
+          // opacity: 0.6,
+          // transition: 'opacity 0.5s',
+        },
       }}
     >
-      <Container maxWidth="lg">
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="text.primary"
-          gutterBottom
-          fontWeight="bold"
-        >
-          Physio<Box component="span" sx={{ color: '#2c5ae9' }}>Flow</Box>
-        </Typography>
-        <Typography variant="h5" align="center" color="text.secondary" paragraph>
-          AI-Powered Physiotherapy Assistant with Real-Time Movement Analysis
-        </Typography>
-        <Stack
-          sx={{ pt: 4 }}
-          direction="row"
-          spacing={2}
-          justifyContent="center"
-        >
-          <Button variant="contained" size="large">
-            Try Now
-          </Button>
-          <Button variant="outlined" size="large">
-            Learn More
-          </Button>
-        </Stack>
-      </Container>
+      <Box sx={{ position: 'relative', zIndex: 2, width: '100%' }}>
+        {/* Subtle dotted background accent */}
+        <Box sx={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          // backgroundImage: 'radial-gradient(rgba(44,90,233,0.07) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+        }} />
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
+          <Grid container alignItems="center" spacing={6}>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+                <Typography
+                  component="h1"
+                  variant="h2"
+                  // fontWeight={900}
+                  sx={{
+                    color: 'black',
+                    mb: 0.5,
+                    // fontSize: { xs: '2.6rem', md: '4.2rem' },
+                    fontWeight: 'bold',
+                    textShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+                    letterSpacing: 0.5,
+                    lineHeight: 1.08,
+                    display: 'inline-block',
+                    textAlign: { xs: 'center', md: 'left' },
+                    width: { xs: '100%', md: 'auto' }
+                  }}
+                >
+                  PhysioFlow
+                </Typography>
+                <Typography
+                  variant="h5"
+                  color="text.secondary"
+                  paragraph
+                  align="left"
+                  sx={{
+                    mb: 4,
+                    mt: 1,
+                    maxWidth: 600,
+                    mx: { xs: 'auto', md: 0 },
+                    textAlign: { xs: 'center', md: 'left' },
+                    display: 'block',
+                  }}
+                >
+                  AI-Powered Physiotherapy Assistant with Real-Time Movement Analysis
+                </Typography>
+                <Stack
+                  sx={{ pt: 2 }}
+                  direction="row"
+                  spacing={2}
+                  justifyContent={{ xs: 'center', md: 'flex-start' }}
+                >
+                  <Button
+                    variant="contained"
+                    size="large"
+                    sx={{
+                      bgcolor: '#2c5ae9',
+                      color: '#fff',
+                      fontWeight: 700,
+                      boxShadow: 3,
+                      '&:hover': { bgcolor: '#1d3ea6' }
+                    }}
+                  >
+                    Try Now
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    sx={{
+                      borderColor: '#2c5ae9',
+                      color: '#2c5ae9',
+                      fontWeight: 700,
+                      '&:hover': { borderColor: '#1d3ea6', color: '#1d3ea6' }
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </Stack>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-end' } }}>
+                <Box display="flex" justifyContent="center" alignItems="center" gap={6}>
+                  <Box sx={{ width: 520, height: 480, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <svg ref={svgRef} width="520" height="480" viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Bones */}
+                      {BONES.map(([i, j], b) => (
+                        <line key={`bone0_${b}`} id={`bone0_${b}`} x1={-1000} y1={-1000} x2={-1000} y2={-1000} stroke="#2c5ae9" strokeWidth={10} strokeLinecap="round" opacity={0.22 + b*0.045} />
+                      ))}
+                      {/* Joints */}
+                      {POSE_JJACK_CLOSED.map((_, i) => (
+                        <circle key={`joint0_${i}`} id={`joint0_${i}`} cx={-1000} cy={-1000} r={12} fill="#2c5ae9" stroke="#e8f0fe" strokeWidth={4} />
+                      ))}
+                      {/* Head highlight */}
+                      <circle id={`head0`} cx={-1000} cy={-1000} r={38} fill="#e8f0fe" stroke="#2c5ae9" strokeWidth={12} />
+                    </svg>
+                  </Box>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     </Box>
   );
 }
@@ -65,14 +368,26 @@ function Hero() {
 // Video section
 function VideoDemo() {
   return (
-    <Box sx={{ 
-      background: 'linear-gradient(180deg, #e8f0fe 0%, #f8f9fa 100%)',
-      py: 8 
-    }}>
+    <Box
+      id="demo"
+      sx={{ 
+        // background: 'linear-gradient(180deg, #e8f0fe 0%, #f8f9fa 100%)',
+        py: 8,
+        scrollMarginTop: { xs: 13, sm: 16 }
+      }}
+    >
       <Container maxWidth="lg">
-        <Typography variant="h4" align="center" gutterBottom>
-          See PhysioFlow in Action
-        </Typography>
+      <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{
+              fontWeight: 'bold',
+              textShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', // diffused shadow
+            }}
+          >
+            See PhysioFlow In Action
+          </Typography>
         <Box
           sx={{
             width: '100%',
@@ -119,17 +434,17 @@ function Features() {
     {
       title: 'Real-time Movement Analysis',
       description: 'Get instant feedback on your exercise form with advanced computer vision.',
-      image: 'https://via.placeholder.com/400x300?text=Movement+Analysis',
+      image: imgFeature1,
     },
     {
       title: 'AI-Powered Guidance',
       description: 'Groq AI provides personalized guidance and customized exercise plans.',
-      image: 'https://via.placeholder.com/400x300?text=AI+Guidance',
+      image: imgFeature2,
     },
     {
-      title: 'Progress Tracking',
-      description: 'Monitor your improvement over time with detailed analytics and reports.',
-      image: 'https://via.placeholder.com/400x300?text=Progress+Tracking',
+      title: 'Personalized Progress Tracking',
+      description: 'Monitor your improvement over time and stay motivated with visual analytics.',
+      image: imgFeature3,
     },
   ];
 
@@ -157,14 +472,22 @@ function Features() {
   };
 
   return (
-    <Box sx={{ py: 8 }} ref={ref}>
+    <Box id="features" sx={{ py: 8, scrollMarginTop: { xs: 13, sm: 16 } }} ref={ref}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{
+              fontWeight: 'bold',
+              textShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', // diffused shadow
+            }}
+          >
             Key Features
           </Typography>
         </motion.div>
@@ -180,10 +503,14 @@ function Features() {
                 <motion.div variants={itemVariants}>
                   <Card
                     sx={{
-                      height: '100%',
+                      height: 340,
+                      minHeight: 340,
+                      maxHeight: 340,
                       display: 'flex',
                       flexDirection: 'column',
                       boxShadow: 3,
+                      alignItems: 'stretch',
+                      justifyContent: 'flex-start',
                       '&:hover': {
                         transform: 'translateY(-8px)',
                         transition: 'transform 0.3s ease-in-out',
@@ -194,15 +521,16 @@ function Features() {
                   >
                     <CardMedia
                       component="img"
-                      height="200"
+                      height="220"
                       image={feature.image}
                       alt={feature.title}
+                      sx={{ objectFit: 'cover', width: '100%' }}
                     />
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography gutterBottom variant="h5" component="h2" sx={{ color: '#2c5ae9' }}>
+                    <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', p: 1.5, minHeight: 0 }}>
+                      <Typography gutterBottom variant="h5" component="h2" sx={{ color: '#2c5ae9', fontWeight: 700, textAlign: 'center', mb: 0.5, fontSize: 22, lineHeight: 1.2 }}>
                         {feature.title}
                       </Typography>
-                      <Typography>
+                      <Typography sx={{ fontSize: 14.5, color: 'text.secondary', textAlign: 'center', mt: 0, lineHeight: 1.3 }}>
                         {feature.description}
                       </Typography>
                     </CardContent>
@@ -217,127 +545,11 @@ function Features() {
   );
 }
 
-// Testimonials section
-function Testimonials() {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const testimonials = [
-    {
-      name: 'Sarah J.',
-      role: 'Recovering from knee surgery',
-      quote: 'PhysioFlow made my recovery process so much easier. The real-time feedback helped me avoid reinjury.',
-      avatar: 'https://via.placeholder.com/100x100',
-    },
-    {
-      name: 'Michael T.',
-      role: 'Physical Therapist',
-      quote: 'I recommend PhysioFlow to all my patients. It helps them stay consistent with their exercises at home.',
-      avatar: 'https://via.placeholder.com/100x100',
-    },
-    {
-      name: 'David K.',
-      role: 'Marathon runner',
-      quote: 'After my hamstring injury, PhysioFlow guided me through a progressive rehab program. I was back to running in half the expected time.',
-      avatar: 'https://via.placeholder.com/100x100',
-    },
-    {
-      name: 'Robert M.',
-      role: 'Senior recovering from hip replacement',
-      quote: 'At 72, technology isn\'t my strong suit, but PhysioFlow is so intuitive. The voice guidance feels like having a therapist right beside me.',
-      avatar: 'https://via.placeholder.com/100x100',
-    }
-  ];
-
-  return (
-    <Box sx={{ bgcolor: 'background.paper', py: 8 }} ref={ref}>
-      <Container maxWidth="lg">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Typography variant="h4" align="center" gutterBottom>
-            What Our Users Say
-          </Typography>
-        </motion.div>
-        <Grid container spacing={4} sx={{ mt: 2 }}>
-          {testimonials.map((testimonial, index) => (
-            <Grid item key={index} xs={12} sm={6} md={6} lg={3}>
-              <motion.div
-                initial={{ 
-                  opacity: 0, 
-                  x: index % 2 === 0 ? -100 : 100  // Alternate left and right
-                }}
-                animate={inView ? { 
-                  opacity: 1, 
-                  x: 0 
-                } : { 
-                  opacity: 0, 
-                  x: index % 2 === 0 ? -100 : 100 
-                }}
-                transition={{ 
-                  duration: 0.7,
-                  delay: index * 0.2,  // Stagger the animations
-                  type: 'spring',
-                  damping: 12
-                }}
-              >
-                <Card 
-                  sx={{ 
-                    height: '100%', 
-                    display: 'flex', 
-                    flexDirection: 'column',
-                    boxShadow: 2,
-                    '&:hover': {
-                      boxShadow: 6,
-                      transform: 'scale(1.03)',
-                      transition: 'all 0.3s ease'
-                    },
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography variant="body1" paragraph sx={{ fontStyle: 'italic' }}>
-                      "{testimonial.quote}"
-                    </Typography>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
-                      <Box
-                        component="img"
-                        sx={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: '50%',
-                          mr: 2,
-                        }}
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                      />
-                      <Box>
-                        <Typography variant="subtitle1" sx={{ color: 'primary.main' }}>{testimonial.name}</Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {testimonial.role}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </Box>
-  );
-}
-
 // FAQ section
 function FAQ() {
   const [expanded, setExpanded] = React.useState(false);
   
-  const { ref, inView } = useInView({
+  const { ref: faqRef, inView: faqInView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
@@ -346,17 +558,17 @@ function FAQ() {
     {
       id: 'panel1',
       question: 'What equipment do I need to use PhysioFlow?',
-      answer: 'Just a smartphone or tablet with a camera. PhysioFlow works on any modern device with web access. The app is optimized for both mobile and desktop experiences, with mobile focusing on camera-based tracking and desktop providing detailed analytics and progress visualization.',
+      answer: 'Just a smartphone or tablet with a camera. PhysioFlow works on any modern device with web access. The app is optimized for both mobile and desktop experiences, with mobile focusing on camera-based tracking.',
     },
     {
       id: 'panel2',
       question: 'How accurate is the movement detection?',
-      answer: 'Our AI-powered system achieves 95% accuracy in detecting proper form and movement patterns. We use a combination of TensorFlow and MediaPipe technologies to track 33 key body points in real-time, allowing for precise analysis of your movements.',
+      answer: 'Our AI-powered system achieves 85% accuracy in detecting proper form and movement patterns. We use a combination of OpenCV and MediaPipe technologies to track 33 key body points in real-time, allowing for precise analysis of your movements.',
     },
     {
       id: 'panel3',
       question: 'Can I use PhysioFlow without a prescription?',
-      answer: 'Yes! While PhysioFlow works great with professional guidance, anyone can use it for exercise guidance and form correction. The app includes a library of common physiotherapy exercises and yoga poses that are safe for most users.',
+      answer: 'Yes! While PhysioFlow works great with professional guidance, anyone can use it for exercise guidance and form correction. The app includes a exercise modules of common physiotherapy exercises and yoga poses that are safe for most users.',
     },
     {
       id: 'panel4',
@@ -371,12 +583,12 @@ function FAQ() {
     {
       id: 'panel6',
       question: 'Can I track my progress over time?',
-      answer: 'Yes, PhysioFlow includes comprehensive progress tracking features. You can view detailed analytics of your performance, including range of motion improvements, exercise consistency, and form accuracy over time. All this data is visualized in easy-to-understand charts and graphs.',
+      answer: 'Unfortunately, PhysioFlow does not include comprehensive progress tracking features at the moment. We are working on providing detailed analytics of your performance, including range of motion improvements, exercise consistency, and form accuracy over time.',
     },
     {
       id: 'panel7',
       question: 'Do I need a subscription to use PhysioFlow?',
-      answer: 'PhysioFlow offers both free and premium tiers. The free version includes basic exercise tracking and form analysis, while the premium subscription provides advanced features like personalized exercise programs, detailed progress analytics, and unlimited access to our exercise library.',
+      answer: 'PhysioFlow is completely free to use. All features, including exercise tracking, form analysis, and access to our exercise library, are available at no cost. Enjoy the full experience without any subscription or hidden fees.',
     },
     {
       id: 'panel8',
@@ -385,41 +597,63 @@ function FAQ() {
     },
   ];
 
+  const handleExpand = (id) => {
+    setExpanded(expanded === id ? false : id);
+  };
+
   return (
-    <Box sx={{ py: 8 }} ref={ref}>
+    <Box id="faq" sx={{ py: 8, scrollMarginTop: { xs: 13, sm: 16 } }} ref={faqRef}>
       <Container maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+          animate={faqInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ 
             type: 'spring',
-            stiffness: 50,
-            damping: 10,
-            duration: 0.8 
+            stiffness: 60,
+            damping: 14
           }}
         >
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{
+              fontWeight: 'bold',
+              textShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', // diffused shadow
+            }}
+          >
             Frequently Asked Questions
           </Typography>
         </motion.div>
         <Box sx={{ mt: 4 }}>
-          {faqs.map((faq) => (
-            <Box key={faq.id} sx={{ mb: 2 }}>
-              <Box 
-                onClick={() => setExpanded(expanded === faq.id ? false : faq.id)}
-                sx={{ 
-                  p: 2, 
-                  bgcolor: 'background.paper', 
-                  borderRadius: expanded === faq.id ? '4px 4px 0 0' : 1,
-                  boxShadow: 1,
+          {faqs.map((faq, idx) => (
+            <motion.div
+              key={faq.id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={faqInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{ duration: 0.45, delay: 0.1 + idx * 0.08, ease: [0.4, 0, 0.2, 1] }}
+              style={{ width: '100%', marginBottom: 20 }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: 'primary.light',
+                  color: 'white',
+                  borderTopLeftRadius: 8,
+                  borderTopRightRadius: 8,
+                  borderBottomLeftRadius: expanded === faq.id ? 0 : 8,
+                  borderBottomRightRadius: expanded === faq.id ? 0 : 8,
+                  boxShadow: 2,
+                  p: 1.5,
                   display: 'flex',
-                  justifyContent: 'space-between',
                   alignItems: 'center',
+                  justifyContent: 'space-between',
                   cursor: 'pointer',
-                  '&:hover': { bgcolor: 'action.hover' }
+                  mb: 0,
+                  transition: 'border-radius 0.3s',
                 }}
+                onClick={() => handleExpand(faq.id)}
               >
-                <Typography variant="h6">
+                <Typography variant="subtitle1" color="white">
                   {faq.question}
                 </Typography>
                 <Box sx={{ 
@@ -429,24 +663,26 @@ function FAQ() {
                   ▼
                 </Box>
               </Box>
-              <Box sx={{ 
-                height: expanded === faq.id ? 'auto' : 0,
-                overflow: 'hidden',
-                transition: 'height 0.3s ease-in-out',
-                bgcolor: 'background.paper',
-                borderBottomLeftRadius: 1,
-                borderBottomRightRadius: 1,
-                boxShadow: 1,
-                visibility: expanded === faq.id ? 'visible' : 'hidden',
-                opacity: expanded === faq.id ? 1 : 0,
-                transition: 'all 0.3s ease-in-out',
-                mt: -0.5
-              }}>
-                <Typography variant="body1" color="text.secondary" sx={{ p: 2 }}>
-                  {faq.answer}
-                </Typography>
-              </Box>
-            </Box>
+              <Collapse in={expanded === faq.id} timeout={400} easing={{ enter: 'cubic-bezier(0.4,0,0.2,1)', exit: 'cubic-bezier(0.4,0,0.2,1)' }}>
+                <Box
+                  sx={{
+                    backgroundColor: 'primary.main',
+                    color: 'white',
+                    borderBottomLeftRadius: 8,
+                    borderBottomRightRadius: 8,
+                    borderTopLeftRadius: 0,
+                    borderTopRightRadius: 0,
+                    boxShadow: 2,
+                    p: 2,
+                    mt: 0,
+                  }}
+                >
+                  <Typography variant="body1" color="white" sx={{ p: 2, pt: 0 }}>
+                    {faq.answer}
+                  </Typography>
+                </Box>
+              </Collapse>
+            </motion.div>
           ))}
         </Box>
       </Container>
@@ -456,23 +692,91 @@ function FAQ() {
 
 // Footer section
 function Footer() {
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <Box sx={{ bgcolor: 'primary.main', py: 6, color: 'white' }}>
+    <Box sx={{ 
+      // bgcolor: 'primary.dark', 
+      py: 3, color: 'black' }}>
       <Container maxWidth="lg">
-        <Typography variant="h6" align="center" gutterBottom>
-          PhysioFlow
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="white"
-          component="p"
-        >
-          AI-Powered Physiotherapy Assistant
-        </Typography>
-        <Typography variant="body2" color="white" align="center" sx={{ opacity: 0.8 }}>
-          © {new Date().getFullYear()} PhysioFlow. All rights reserved.
-        </Typography>
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          flexDirection: { xs: 'column', sm: 'row' },
+          gap: { xs: 2, sm: 0 }
+        }}>
+          {/* Navigation Links */}
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+            <Typography 
+              variant="body2" 
+              color="black" 
+              sx={{ 
+                cursor: 'pointer',
+                '&:hover': { textDecoration: 'underline' }
+              }}
+              onClick={() => scrollToSection('home')}
+            >
+              Home
+            </Typography>
+            <Typography variant="body2" color="black">•</Typography>
+            <Typography 
+              variant="body2" 
+              color="black"
+              sx={{ 
+                cursor: 'pointer',
+                '&:hover': { textDecoration: 'underline' }
+              }}
+              onClick={() => scrollToSection('demo')}
+            >
+              Demo
+            </Typography>
+            <Typography variant="body2" color="black">•</Typography>
+            <Typography 
+              variant="body2" 
+              color="black"
+              sx={{ 
+                cursor: 'pointer',
+                '&:hover': { textDecoration: 'underline' }
+              }}
+              onClick={() => scrollToSection('features')}
+            >
+              Features
+            </Typography>
+            <Typography variant="body2" color="black">•</Typography>
+            <Typography 
+              variant="body2" 
+              color="black"
+              sx={{ 
+                cursor: 'pointer',
+                '&:hover': { textDecoration: 'underline' }
+              }}
+              onClick={() => scrollToSection('faq')}
+            >
+              FAQs
+            </Typography>
+          </Box>
+          
+          {/* Copyright Text */}
+          <Typography variant="body2" color="black" sx={{ opacity: 0.9, fontWeight: 'medium', textAlign: 'center' }}>
+            Copyright &copy; PhysioFlow {new Date().getFullYear()}
+          </Typography>
+          
+          {/* GitHub Logo */}
+          <IconButton 
+            href="https://github.com/dhananjay2403/physioflow-ai.git" 
+            target="_blank"
+            sx={{ color: 'black' }}
+            aria-label="GitHub repository"
+          >
+            <GitHubIcon />
+          </IconButton>
+        </Box>
       </Container>
     </Box>
   );
@@ -480,16 +784,20 @@ function Footer() {
 
 export default function HomePage() {
   return (
-    <Box>
+    <GradientBackground>
       <AppAppBar />
       <main>
         <Hero />
+        <Divider></Divider>
         <VideoDemo />
+        <Divider></Divider>
         <Features />
-        <Testimonials />
+        <Divider></Divider>
+        {/* <Testimonials /> */}
         <FAQ />
       </main>
+      <Divider></Divider>
       <Footer />
-    </Box>
+    </GradientBackground>
   );
 }

@@ -40,6 +40,7 @@ export default function Hero() {
     <Box
       id="hero"
       sx={(theme) => ({
+        scrollMarginTop: { xs: 13, sm: 16 },
         width: '100%',
         backgroundRepeat: 'no-repeat',
         backgroundImage:

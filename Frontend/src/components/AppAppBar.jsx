@@ -64,9 +64,9 @@ export default function AppAppBar() {
               <Button variant="text" color="info" size="small">
                 Home
               </Button>
-              <Button variant="text" color="info" size="small">
+              {/* <Button variant="text" color="info" size="small">
                 Dashboard
-              </Button>
+              </Button> */}
               <Button variant="text" color="info" size="small">
                 Groq Assistant
               </Button>
@@ -76,9 +76,9 @@ export default function AppAppBar() {
               <Button variant="text" color="info" size="small">
                 About Us
               </Button>
-              <Button variant="text" color="info" size="small">
+              {/* <Button variant="text" color="info" size="small">
                 Feedback
-              </Button>
+              </Button> */}
             </Box>
           <Box
             sx={{
@@ -122,11 +122,11 @@ export default function AppAppBar() {
                 </Box>
 
                 <MenuItem>Home</MenuItem>
-                <MenuItem>Dashboard</MenuItem>
+                {/* <MenuItem>Dashboard</MenuItem> */}
                 <MenuItem>Groq Assistant</MenuItem>
                 <MenuItem>Exercises</MenuItem>
                 <MenuItem>About Us</MenuItem>
-                <MenuItem>Feedback</MenuItem>
+                {/* <MenuItem>Feedback</MenuItem> */}
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
                   <Button color="primary" variant="contained" fullWidth>
