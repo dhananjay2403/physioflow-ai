@@ -203,7 +203,7 @@ function Hero() {
     <Box
       id="home"
       sx={{
-        bgcolor: '#fff',
+        bgcolor: 'background.paper',
         pt: { xs: 14, sm: 16, md: 16, lg: 16 },
         pb: { xs: 8, md: 14 },
         minHeight: '65vh',
@@ -212,111 +212,137 @@ function Hero() {
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        scrollMarginTop: { xs: 13, sm: 16 }
+        scrollMarginTop: { xs: 13, sm: 16 },
+        '::before': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          background:
+            'radial-gradient(circle at 20% 30%, rgba(44,90,233,0.07) 0%, transparent 70%),' +
+            'radial-gradient(circle at 80% 70%, rgba(44,90,233,0.10) 0%, transparent 70%),' +
+            'linear-gradient(120deg, rgba(232,240,254,0.7) 0%, rgba(248,249,250,0.7) 100%)',
+          opacity: 1,
+          transition: 'opacity 0.5s',
+        },
+        '::after': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+          background:
+            'repeating-linear-gradient(135deg, rgba(44,90,233,0.03) 0px, rgba(44,90,233,0.03) 2px, transparent 2px, transparent 16px)',
+          opacity: 0.6,
+          transition: 'opacity 0.5s',
+        },
       }}
     >
-      {/* Subtle dotted background accent */}
-      <Box sx={{
-        position: 'absolute',
-        inset: 0,
-        zIndex: 0,
-        pointerEvents: 'none',
-        backgroundImage: 'radial-gradient(rgba(44,90,233,0.07) 1px, transparent 1px)',
-        backgroundSize: '28px 28px',
-      }} />
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-        <Grid container alignItems="center" spacing={6}>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
-              <Typography
-                component="h1"
-                variant="h2"
-                fontWeight={900}
-                sx={{
-                  color: 'black',
-                  mb: 0.5,
-                  fontSize: { xs: '2.6rem', md: '4.2rem' },
-                  letterSpacing: 0.5,
-                  lineHeight: 1.08,
-                  display: 'inline-block',
-                  textAlign: { xs: 'center', md: 'left' },
-                  width: { xs: '100%', md: 'auto' }
-                }}
-              >
-                PhysioFlow
-              </Typography>
-              <Typography
-                variant="h5"
-                color="text.secondary"
-                paragraph
-                align="left"
-                sx={{
-                  mb: 4,
-                  mt: 1,
-                  maxWidth: 600,
-                  mx: { xs: 'auto', md: 0 },
-                  textAlign: { xs: 'center', md: 'left' },
-                  display: 'block',
-                }}
-              >
-                AI-Powered Physiotherapy Assistant with Real-Time Movement Analysis
-              </Typography>
-              <Stack
-                sx={{ pt: 2 }}
-                direction="row"
-                spacing={2}
-                justifyContent={{ xs: 'center', md: 'flex-start' }}
-              >
-                <Button
-                  variant="contained"
-                  size="large"
+      <Box sx={{ position: 'relative', zIndex: 2, width: '100%' }}>
+        {/* Subtle dotted background accent */}
+        <Box sx={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          backgroundImage: 'radial-gradient(rgba(44,90,233,0.07) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+        }} />
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
+          <Grid container alignItems="center" spacing={6}>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+                <Typography
+                  component="h1"
+                  variant="h2"
+                  fontWeight={900}
                   sx={{
-                    bgcolor: '#2c5ae9',
-                    color: '#fff',
-                    fontWeight: 700,
-                    boxShadow: 3,
-                    '&:hover': { bgcolor: '#1d3ea6' }
+                    color: 'black',
+                    mb: 0.5,
+                    fontSize: { xs: '2.6rem', md: '4.2rem' },
+                    letterSpacing: 0.5,
+                    lineHeight: 1.08,
+                    display: 'inline-block',
+                    textAlign: { xs: 'center', md: 'left' },
+                    width: { xs: '100%', md: 'auto' }
                   }}
                 >
-                  Try Now
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="large"
+                  PhysioFlow
+                </Typography>
+                <Typography
+                  variant="h5"
+                  color="text.secondary"
+                  paragraph
+                  align="left"
                   sx={{
-                    borderColor: '#2c5ae9',
-                    color: '#2c5ae9',
-                    fontWeight: 700,
-                    '&:hover': { borderColor: '#1d3ea6', color: '#1d3ea6' }
+                    mb: 4,
+                    mt: 1,
+                    maxWidth: 600,
+                    mx: { xs: 'auto', md: 0 },
+                    textAlign: { xs: 'center', md: 'left' },
+                    display: 'block',
                   }}
                 >
-                  Learn More
-                </Button>
-              </Stack>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-end' } }}>
-              <Box display="flex" justifyContent="center" alignItems="center" gap={6}>
-                <Box sx={{ width: 520, height: 480, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <svg ref={svgRef} width="520" height="480" viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    {/* Bones */}
-                    {BONES.map(([i, j], b) => (
-                      <line key={`bone0_${b}`} id={`bone0_${b}`} x1={-1000} y1={-1000} x2={-1000} y2={-1000} stroke="#2c5ae9" strokeWidth={10} strokeLinecap="round" opacity={0.22 + b*0.045} />
-                    ))}
-                    {/* Joints */}
-                    {POSE_JJACK_CLOSED.map((_, i) => (
-                      <circle key={`joint0_${i}`} id={`joint0_${i}`} cx={-1000} cy={-1000} r={12} fill="#2c5ae9" stroke="#e8f0fe" strokeWidth={4} />
-                    ))}
-                    {/* Head highlight */}
-                    <circle id={`head0`} cx={-1000} cy={-1000} r={38} fill="#e8f0fe" stroke="#2c5ae9" strokeWidth={12} />
-                  </svg>
+                  AI-Powered Physiotherapy Assistant with Real-Time Movement Analysis
+                </Typography>
+                <Stack
+                  sx={{ pt: 2 }}
+                  direction="row"
+                  spacing={2}
+                  justifyContent={{ xs: 'center', md: 'flex-start' }}
+                >
+                  <Button
+                    variant="contained"
+                    size="large"
+                    sx={{
+                      bgcolor: '#2c5ae9',
+                      color: '#fff',
+                      fontWeight: 700,
+                      boxShadow: 3,
+                      '&:hover': { bgcolor: '#1d3ea6' }
+                    }}
+                  >
+                    Try Now
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    sx={{
+                      borderColor: '#2c5ae9',
+                      color: '#2c5ae9',
+                      fontWeight: 700,
+                      '&:hover': { borderColor: '#1d3ea6', color: '#1d3ea6' }
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </Stack>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-end' } }}>
+                <Box display="flex" justifyContent="center" alignItems="center" gap={6}>
+                  <Box sx={{ width: 520, height: 480, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <svg ref={svgRef} width="520" height="480" viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Bones */}
+                      {BONES.map(([i, j], b) => (
+                        <line key={`bone0_${b}`} id={`bone0_${b}`} x1={-1000} y1={-1000} x2={-1000} y2={-1000} stroke="#2c5ae9" strokeWidth={10} strokeLinecap="round" opacity={0.22 + b*0.045} />
+                      ))}
+                      {/* Joints */}
+                      {POSE_JJACK_CLOSED.map((_, i) => (
+                        <circle key={`joint0_${i}`} id={`joint0_${i}`} cx={-1000} cy={-1000} r={12} fill="#2c5ae9" stroke="#e8f0fe" strokeWidth={4} />
+                      ))}
+                      {/* Head highlight */}
+                      <circle id={`head0`} cx={-1000} cy={-1000} r={38} fill="#e8f0fe" stroke="#2c5ae9" strokeWidth={12} />
+                    </svg>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      </Box>
     </Box>
   );
 }
