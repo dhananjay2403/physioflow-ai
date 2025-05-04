@@ -1,237 +1,174 @@
-![github-submission-banner](https://github.com/user-attachments/assets/a1493b84-e4e2-456e-a791-ce35ee2bcf2f)
 
-# 🚀 PhysioFlow
+# PhysioFlow
 
-> AI-driven Physiotherapy Assistant
+> AI-driven Physiotherapy Assistant (Work in Progress 🚧)
 
----
-
-## 📌 Problem Statement
-
-<!-- Select the problem statement number and title from the official list given in Participant Manual. -->
-**Problem Statement 1 - Weave AI magic with Groq**
-
+![PhysioFlow](./Frontend/./src/./assets/./readme/website.png)
 
 ---
 
-## 🎯 Objective
-
-<!-- What problem does your project solve, and who does it serve?  
-Briefly describe the real-world use case and the value it provides. -->
+## Objective
 
 PhysioFlow AI addresses the accessibility gap in physiotherapy by providing an AI-powered assistant that guides users through exercises with real-time analysis and feedback. It serves:
 
-- Physiotherapy patients who need supervised rehabilitation but have limited access to in-person sessions
-- Elderly individuals requiring mobility exercises with proper guidance
-- Athletes recovering from injuries who need precise movement tracking
-- Healthcare providers looking to extend remote care capabilities
-- Anyone seeking to improve physical health with professional-grade guidance
+* Physiotherapy patients who need supervised rehabilitation but have limited access to in-person sessions
+* Elderly individuals requiring mobility exercises with proper guidance
+* Athletes recovering from injuries who need precise movement tracking
+* Healthcare providers looking to extend remote care capabilities
+* Anyone seeking to improve physical health with professional-grade guidance
 
-By combining computer vision, multimodal AI and real-time analysis, PhysioFlow AI makes professional physiotherapy guidance accessible to everyone, everywhere, at any time.
+By combining computer vision, multimodal AI, and real-time analysis, PhysioFlow AI makes professional physiotherapy guidance accessible to everyone, everywhere, at any time.
 
 ---
 
-## 🧠 Team & Approach
+## Team & Approach
 
-### Team Name:  
+### Team Name:
+
 The Bois
 
 ### Team Members:
-- Dhananjay Tiwari (https://github.com/dhananjay2403) - Frontend + Computer Vision
-- Siddharth Kumar (https://github.com/siddharth23k) - Backend + ML
-- Lisha Angral (https://github.com/lishaangral) - UI design + Frontend
-- Anshul Dhoptey (https://github.com/Spectre-anshul) - Computer Vision
 
-### Your Approach:  
-<!-- Why we chose this problem -->
-Our team recognized a critical gap in healthcare accessibility: while physiotherapy is essential for recovery, many patients struggle with limited access to professionals, high costs, and difficulty maintaining proper form without supervision. As healthcare increasingly moves toward digital solutions, we saw an opportunity to leverage AI to democratize access to quality rehabilitation.
+* Dhananjay Tiwari ([https://github.com/dhananjay2403](https://github.com/dhananjay2403)) - Frontend + Computer Vision
+* Siddharth Kumar ([https://github.com/siddharth23k](https://github.com/siddharth23k)) - Backend + ML
+* Lisha Angral ([https://github.com/lishaangral](https://github.com/lishaangral)) - UI Design + Frontend
+* Anshul Dhoptey ([https://github.com/Spectre-anshul](https://github.com/Spectre-anshul)) - Computer Vision
 
-<!-- Key challenges addressed -->
-- Creating accurate real-time pose detection that works across various body types and lighting conditions
-- Developing intelligent form analysis that provides actionable feedback
-- Building a responsive design that optimizes experience based on device capabilities
-- Integrating multimodal AI to understand both visual movements and voice commands
-- Ensuring the system provides personalized guidance similar to a human physiotherapist
+### Your Approach:
 
-<!-- Pivots and breakthroughs -->
-- Initially planned only for mobile, but pivoted to device-responsive design when we realized desktop users needed access to progress tracking
-- Breakthrough in using MediaPipe's pose detection combined with rule-based analysis, significantly simplifying our approach while maintaining accuracy
-- Discovered Groq's multimodal capabilities could enhance our feedback system beyond basic computer vision analysis
+We recognized a critical gap in healthcare accessibility: while physiotherapy is essential for recovery, many patients struggle with limited access to professionals, high costs, and difficulty maintaining proper form without supervision. We aimed to leverage AI to democratize access to quality rehabilitation.
+
+Key challenges addressed:
+
+* Creating accurate real-time pose detection that works across various body types and lighting conditions
+* Developing intelligent form analysis that provides actionable feedback
+* Building a responsive design optimized for both mobile and desktop
+* Integrating multimodal AI for both visual movement understanding and voice commands
+* Providing personalized guidance similar to a human physiotherapist
+
+Pivots and breakthroughs:
+
+* Pivoted from mobile-only to responsive design to accommodate desktop progress tracking
+* Simplified approach using MediaPipe + rule-based analysis while maintaining accuracy
+* Leveraged Groq’s multimodal AI for richer feedback beyond visual cues
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Core Technologies Used:
-- <u>Frontend:</u> <br/>
-        React.js for component-based UI <br/>
-        Tailwind CSS for responsive design <br/>
-        TensorFlow.js and MediaPipe for client-side pose detection <br/>
-        React Router for navigation <br/>
-        Axios for API communication <br/>
 
-- </u>Backend:</u>  
-        Flask for API development  <br/>
-        Python for computer vision processing  <br/>
-        Scikit-learn for machine learning models  <br/>
-        JWT for authentication  <br/>
-        Swagger for API documentation  <br/>
+* **Frontend:** React.js, Material UI
 
-- </u>Database:</u>  <br/> 
-        MongoDB for user data, exercise library, and progress tracking <br/>
-        Redis for caching frequent queries and session management <br/>
+* **Backend:** Flask, Python
 
-- </u>APIs:</u>  <br/> 
-        Groq API for multimodal AI guidance <br/>
-        MediaPipe Pose for skeletal tracking <br/>
-        Web Speech API for voice recognition <br/>
+* **AI/ML:** TensorFlow.js, MediaPipe, OpenCV, Groq API
 
-- </u>Hosting:</u>  
-        Vercel for frontend deployment  <br/>
-        Heroku for backend services  <br/>
-        MongoDB Atlas for database hosting  <br/>
+* **PDF Generation:** jsPDF
+
+* **Authentication:** Firebase Auth
+
+* **Deployment:** The app is designed for deployment on platforms such as Vercel or Netlify for the frontend, and Render or Railway for the backend.
 
 ### Sponsor Technologies Used:
-<!-- [ ] **Groq:** _How you used Groq_  *(Mark with ✅ if completed)* -->
 
-- ✅ Groq: Used Groq's multimodal AI to analyze user movements captured via camera and provide intelligent, context-aware feedback on exercise form. The Groq API powers our virtual physiotherapist assistant, enabling it to understand both visual movements and voice commands, generating personalized exercise plans, and delivering natural language feedback on technique corrections.
----
-
-## ✨ Key Features
-
-<!-- Highlight the most important features of your project:
-Add images, GIFs, or screenshots if helpful! -->
-
-- ✅ Real-time Movement Analysis: Using MediaPipe and custom algorithms to track body movements and provide instant feedback on exercise form.
-- ✅ Multimodal AI Guidance: Groq-powered assistant that understands both visual input and voice commands to provide personalized coaching.
-- ✅ Responsive Design: Optimized experience for mobile (camera functionality) and desktop (progress tracking and visualization).
-- ✅ Comprehensive Progress Tracking: Visual reports and metrics showing improvement over time and generating personalized exercise plans.
-- ✅ Exercise Library: Curated collection of physiotherapy and yoga exercises with detailed instructions and visual guides.
-
+**Groq:** Used Groq’s multimodal AI to analyze user movements via camera and provide intelligent, context-aware feedback on exercise form. Groq powers our virtual physiotherapist, enabling natural language feedback and personalized exercise recommendations.
 
 ---
+
+## Key Features
+
+✅ Real-time Movement Analysis
+✅ Multimodal AI Guidance
+✅ Responsive Design
+✅ Exercise Library
+
+🚧 **Under Construction (In Progress):**
+
+* Integration of backend with frontend pages
+* Connecting Groq AI and computer vision models to implementation page
+* Camera-based movement detection pipeline on Implementation Page
+* Generating downloadable PDF reports of AI-generated analysis
+* Hosting the fully integrated site
+
+Currently, **frontend pages (Home, Exercise, Groq AI Chatbot, Implementation) are built and functional as UI components. Integration of AI and backend logic is pending.**
+
+<!-- ---
 
 ## 📽️ Demo & Deliverables
 
-- **Demo Video Link:** [Paste YouTube or Loom link here]  
-- **Pitch Deck / PPT Link:** [Paste Google Slides / PDF link here]  
+* **Demo Video Link:** \[Link to be added]
+* **Pitch Deck / PPT Link:** \[Link to be added] -->
 
 ---
 
-## ✅ Tasks & Bonus Checklist
+### How to Run Locally
 
-- [ ] **All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form** (Details in Participant Manual)  
-- [ ] **All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points)**  (Details in Participant Manual)
-- [ ] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)**  (Details in Participant Manual)
+1. **Clone the repository**:
 
-*(Mark with ✅ if completed)*
+   ```bash
+   git clone https://github.com/yourusername/physioflow.git
+   cd physioflow
+   ```
 
----
+2. **Install frontend dependencies**:
 
-## 🧪 How to Run the Project
+   ```bash
+   cd frontend
+   npm install
+   ```
 
-### Requirements:
-- Node.js v16+ for frontend
-- Python 3.8+ for backend
-- MongoDB database
-- Groq API key (sign up at groq.com)
-- Camera access (for exercise tracking functionality)
+3. **Install backend dependencies**:
 
-### Local Setup:
-<!-- ```bash
-# Clone the repo
-git clone https://github.com/your-team/project-name
+   ```bash
+   cd ../backend
+   npm install
+   ```
 
-# Install dependencies
-cd project-name
-npm install
+4. **Run the frontend**:
 
-# Start development server
-npm run dev
-``` 
+   ```bash
+   npm start
+   ```
 
-Provide any backend/frontend split or environment setup notes here.
--->
+5. **Run the backend** (optional, if needed for APIs):
 
-<!-- Create a .env file in the frontend directory: -->
-REACT_APP_API_URL=http://localhost:5000
+   ```bash
+   npm start
+   ```
 
-<!-- Create a .env file in the backend directory: -->
-GROQ_API_KEY=your_groq_api_key
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
+*Configuration files (e.g., `.env`) may be required for API keys.*
 
-<!-- Local Setup -->
-# Clone the repo
-git clone [https://github.com/your-team/physioflow-ai](https://github.com/your-team/physioflow-ai)
-
-# Backend setup
-cd physioflow-ai/backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python app.py
-
-# Frontend setup (in a new terminal)
-cd physioflow-ai/frontend
-npm install
-npm start
-
-
-The application will be available at http://localhost:3000
-
+> **Note:** Currently, frontend pages are functional and styled; backend routes, AI integration, and camera-based analysis are **not yet connected to frontend components. Integration and hosting are in progress.**
 
 ---
 
-## 🧬 Future Scope
+## Future Scope
 
-<!-- List improvements, extensions, or follow-up features:
-
-- 📈 More integrations  
-- 🛡️ Security enhancements  
-- 🌐 Localization / broader accessibility   -->
-
-- Yoga Pose Analyzer: Extend our movement detection system to recognize & guide through yoga poses with proper alignment feedback
-- Strength Training Analysis: Add support for analyzing weight lifting form and providing safety guidance
-- Healthcare Provider Dashboard: Create an interface for physiotherapists to monitor patient progress remotely
-- Enhanced Voice Interaction: Develop more sophisticated voice command recognition for hands-free operation
-- Mobile App Development: Native mobile applications for improved performance and offline capabilities
-- Integration with Wearables: Connect with fitness trackers and smartwatches for more precise movement data
-- Multilingual Support: Localization for global accessibility and cultural-specific exercise routines
+* Yoga Pose Analyzer
+* Progress Tracking
+* Strength Training Analysis
+* Healthcare Provider Dashboard
+* Enhanced Voice Interaction
+* Native Mobile Apps
+* Wearable Integration
+* Multilingual Support
 
 ---
 
-## 📎 Resources / Credits
+Research:
 
-<!-- - APIs or datasets used  
-- Open source libraries or tools referenced  
-- Acknowledgements   -->
-
-APIs & Libraries:
-- MediaPipe for pose detection
-- Groq API for multimodal AI capabilities
-- TensorFlow.js for machine learning in the browser
-- React and Tailwind CSS for frontend
-- Flask for backend 
-
-Datasets:
-- PhysioNet for reference physiotherapy movements
-- Open source yoga and exercise databases for pose references
-
-Research Papers:
-- "Computer Vision-Based Systems for Physical Rehabilitation: A Review" (2021)
-- "Deep Learning for Human Movement Understanding" (2023)
+* "Computer Vision-Based Systems for Physical Rehabilitation: A Review" (2021)
+* "Deep Learning for Human Movement Understanding" (2023)
 
 ---
 
-## 🏁 Final Words
+## Acknowledgements
 
-<!-- Share your hackathon journey — challenges, learnings, fun moments, or shout-outs! -->
+PhysioFlow AI represents our vision for accessible healthcare. The hackathon journey challenged us technically and creatively—from UI design to AI integration.
 
-PhysioFlow AI represents our vision for making healthcare more accessible through technology. Throughout this hackathon, our team faced numerous challenges—from fine-tuning pose detection accuracy to creating an intuitive user experience—but each obstacle taught us valuable lessons about healthcare applications and AI integration.
+🔨 While **key UI pages have been created**, we’re actively working on **connecting AI & backend services, integrating camera-based movement detection, and enabling PDF report generation.** Hosting and deployment will follow post-integration.
 
-Our biggest learning was the importance of simplicity and accessibility; while we were tempted to add complex features, we focused on core functionality that delivers real value to users. We're proud of building a solution that could genuinely help people recover better and faster from injuries and mobility issues.
-
-We'd like to thank the hackathon organizers and sponsors, especially Groq for providing the multimodal AI capabilities that power our virtual physiotherapist. This journey has only strengthened our belief that AI can transform healthcare for the better.
+We thank Groq for powering our AI assistant. This experience has reinforced our belief that AI can transform healthcare for the better.
 
 ---

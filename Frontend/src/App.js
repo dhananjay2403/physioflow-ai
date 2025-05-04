@@ -5,6 +5,9 @@ import GroqAssistant from './components/GroqAssistant';
 import theme from './theme'; // Import your theme
 import Exercises from './components/Exercises';
 import ImplementationPage from './components/ImplementationPage';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -16,6 +19,8 @@ const App = () => (
           <Route path="/chatbot" element={<GroqAssistant />}/>
           <Route path="/exercises" element={<Exercises />}/>
           <Route path="/implementation" element={<ImplementationPage />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Box>
     </BrowserRouter>
